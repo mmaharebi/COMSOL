@@ -16,6 +16,8 @@
             <ColumnDefinition Width="4*" />
             <ColumnDefinition Width="4*" />
         </Grid.ColumnDefinitions>
+        <!--sectioning the window-->
+        <!--menu (File, ..., About)-->
         <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3">
             <Menu>
                 <MenuItem Header="_File">
@@ -26,6 +28,7 @@
                 </MenuItem>
             </Menu>
         </Grid>
+        <!--navigation control for visibility of BORDERs in (Row(1) Column(1))-->
         <Grid Grid.Row="1" Grid.Column="0">
             <TreeView>
                 <TreeViewItem Header="Global Definitions">
@@ -34,8 +37,11 @@
                 </TreeViewItem>
             </TreeView>
         </Grid>
+        <!--(parameters, geometry, ...) section-->
         <Grid Grid.Row="1" Grid.Column="1">
-            <Border BorderThickness="0, 0, 0.1, 0" BorderBrush="Black">
+            <!--one of these BORDERs will be visible at time, by selecting an item from navigation_treeView-->
+            <!--parameters control panel-->
+            <Border Visibility="Hidden" BorderThickness="0, 0, 0.1, 0" BorderBrush="Black">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="4*" />
@@ -81,6 +87,135 @@
                                     <TextBox Width="100" Height="20" />
                                 </StackPanel>
                                 <Button Grid.Row="1" Content="Add" Width="50" Height="Auto" Padding="1"  VerticalAlignment="Top" HorizontalAlignment="Center" IsEnabled="False"/>
+                            </Grid>
+                        </GroupBox>
+                    </Grid>
+                </Grid>
+            </Border>
+            <!--geometry control panel-->
+            <Border Visibility="Hidden" BorderThickness="0, 0, 0.1, 0" BorderBrush="Black">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="1*" />
+                        <RowDefinition Height="1*" />
+                        <RowDefinition Height="1*" />
+                    </Grid.RowDefinitions>
+                    <GroupBox Header="Shapes" Margin="1" Padding="5">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="1*" />
+                                <RowDefinition Height="1*" />
+                            </Grid.RowDefinitions>
+                            <Label Grid.Row="0" Content="Select a shape from below." />
+                            <ComboBox Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top" MinWidth="100"></ComboBox>
+                        </Grid>
+                    </GroupBox>
+                    <!--the following GRID should be visible when "Line" selected from "Shapes"' COMBOBOX-->
+                    <Grid Visibility="Hidden" Grid.Row="1">
+                        <GroupBox Header="Draw rectangle with width, height and left-top corner position" Margin="1" Padding="5">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="1*" />
+                                    <RowDefinition Height="1*" />
+                                    <RowDefinition Height="1*" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="2*" />
+                                    <ColumnDefinition Width="5*" />
+                                    <ColumnDefinition Width="1*" />
+                                    <ColumnDefinition Width="4*" />
+                                    <ColumnDefinition Width="1*" />
+                                    <ColumnDefinition Width="2*" />
+                                    <ColumnDefinition Width="5*" />
+                                    <ColumnDefinition Width="1*" />
+                                    <ColumnDefinition Width="4*" />
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Row="0" Grid.Column="0" Content="X1:" HorizontalAlignment="Right" VerticalAlignment="Center" />
+                                <TextBox Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" />
+                                <Button Grid.Row="0" Grid.Column="3" Content="Parameters..." VerticalAlignment="Center" />
+                                <Label Grid.Row="0" Grid.Column="5" Content="Y1:" HorizontalAlignment="Right" VerticalAlignment="Center" />
+                                <TextBox Grid.Row="0" Grid.Column="6" VerticalAlignment="Center" />
+                                <Button Grid.Row="0" Grid.Column="8" Content="Parameters..." Height="Auto" VerticalAlignment="Center" />
+                                <Label Grid.Row="1" Grid.Column="0" Content="X2:" HorizontalAlignment="Right" VerticalAlignment="Center" />
+                                <TextBox Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" />
+                                <Button Grid.Row="1" Grid.Column="3" Content="Parameters..." Height="Auto" VerticalAlignment="Center" />
+                                <Label Grid.Row="1" Grid.Column="5" Content="Y2:" HorizontalAlignment="Right" VerticalAlignment="Center" />
+                                <TextBox Grid.Row="1" Grid.Column="6" VerticalAlignment="Center" />
+                                <Button Grid.Row="1" Grid.Column="8" Content="Parameters..." Height="Auto" VerticalAlignment="Center" />
+                                <Button Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="9" Content="Draw" Width="50" Height="Auto" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="1"/>
+                            </Grid>
+                        </GroupBox>
+                    </Grid>
+                    <!--the following GRID should be visible when "Rectangle" selected from "Shapes"' COMBOBOX-->
+                    <Grid Visibility="Hidden" Grid.Row="1">
+                        <GroupBox Header="Draw rectangle with width, height and left-top corner position" Margin="1" Padding="5">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="1*" />
+                                    <RowDefinition Height="1*" />
+                                    <RowDefinition Height="1*" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="2*" />
+                                    <ColumnDefinition Width="5*" />
+                                    <ColumnDefinition Width="1*" />
+                                    <ColumnDefinition Width="4*" />
+                                    <ColumnDefinition Width="1*" />
+                                    <ColumnDefinition Width="2*" />
+                                    <ColumnDefinition Width="5*" />
+                                    <ColumnDefinition Width="1*" />
+                                    <ColumnDefinition Width="4*" />
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Row="0" Grid.Column="0" Content="Width:" HorizontalAlignment="Right" VerticalAlignment="Center" />
+                                <TextBox Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" />
+                                <Button Grid.Row="0" Grid.Column="3" Content="Parameters..." VerticalAlignment="Center" />
+                                <Label Grid.Row="0" Grid.Column="5" Content="Height:" HorizontalAlignment="Right" VerticalAlignment="Center" />
+                                <TextBox Grid.Row="0" Grid.Column="6" VerticalAlignment="Center" />
+                                <Button Grid.Row="0" Grid.Column="8" Content="Parameters..." Height="Auto" VerticalAlignment="Center" />
+                                <Label Grid.Row="1" Grid.Column="0" Content="X:" HorizontalAlignment="Right" VerticalAlignment="Center" />
+                                <TextBox Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" />
+                                <Button Grid.Row="1" Grid.Column="3" Content="Parameters..." Height="Auto" VerticalAlignment="Center" />
+                                <Label Grid.Row="1" Grid.Column="5" Content="Y:" HorizontalAlignment="Right" VerticalAlignment="Center" />
+                                <TextBox Grid.Row="1" Grid.Column="6" VerticalAlignment="Center" />
+                                <Button Grid.Row="1" Grid.Column="8" Content="Parameters..." Height="Auto" VerticalAlignment="Center" />
+                                <Button Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="9" Content="Draw" Width="50" Height="Auto" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="1"/>
+                            </Grid>
+                        </GroupBox>
+                    </Grid>
+                    <!--the following GRID should be visible when "Ellipse" selected from "Shapes"' COMBOBOX-->
+                    <Grid Visibility="Hidden" Grid.Row="1">
+                        <GroupBox Header="Draw ellipse with long diameter, short diameter as center position" Margin="1" Padding="5">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="1*" />
+                                    <RowDefinition Height="1*" />
+                                    <RowDefinition Height="1*" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="2*" />
+                                    <ColumnDefinition Width="5*" />
+                                    <ColumnDefinition Width="1*" />
+                                    <ColumnDefinition Width="4*" />
+                                    <ColumnDefinition Width="1*" />
+                                    <ColumnDefinition Width="2*" />
+                                    <ColumnDefinition Width="5*" />
+                                    <ColumnDefinition Width="1*" />
+                                    <ColumnDefinition Width="4*" />
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Row="0" Grid.Column="0" Content="D:" HorizontalAlignment="Right" VerticalAlignment="Center" />
+                                <TextBox Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" />
+                                <Button Grid.Row="0" Grid.Column="3" Content="Parameters..." VerticalAlignment="Center" />
+                                <Label Grid.Row="0" Grid.Column="5" Content="d:" HorizontalAlignment="Right" VerticalAlignment="Center" />
+                                <TextBox Grid.Row="0" Grid.Column="6" VerticalAlignment="Center" />
+                                <Button Grid.Row="0" Grid.Column="8" Content="Parameters..." Height="Auto" VerticalAlignment="Center" />
+                                <Label Grid.Row="1" Grid.Column="0" Content="X:" HorizontalAlignment="Right" VerticalAlignment="Center" />
+                                <TextBox Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" />
+                                <Button Grid.Row="1" Grid.Column="3" Content="Parameters..." Height="Auto" VerticalAlignment="Center" />
+                                <Label Grid.Row="1" Grid.Column="5" Content="Y:" HorizontalAlignment="Right" VerticalAlignment="Center" />
+                                <TextBox Grid.Row="1" Grid.Column="6" VerticalAlignment="Center" />
+                                <Button Grid.Row="1" Grid.Column="8" Content="Parameters..." Height="Auto" VerticalAlignment="Center" />
+                                <Button Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="9" Content="Draw" Width="50" Height="Auto" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="1"/>
                             </Grid>
                         </GroupBox>
                     </Grid>
