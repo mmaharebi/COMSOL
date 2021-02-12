@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:COMSOL"
         mc:Ignorable="d"
-        Title="MainWindow" Height="600" Width="1200" MinWidth="1200" MinHeight="600" WindowState="Maximized">
+        Title="COMSOL" Height="600" Width="1200" MinWidth="1200" MinHeight="600" WindowState="Maximized" Closing="mainWindow_window_Closing">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="20" />
@@ -19,10 +19,10 @@
         <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3">
             <Menu>
                 <MenuItem Header="_File">
-                    <MenuItem Header="_Exit" />
+                    <MenuItem Header="_Exit" Click="exit_menuItem_Clicked" />
                 </MenuItem>
                 <MenuItem Header="_About">
-                    <MenuItem Header="_About" />
+                    <MenuItem Header="_About..." Click="about_menuItem_Clicked" />
                 </MenuItem>
             </Menu>
         </Grid>
