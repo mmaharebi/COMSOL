@@ -30,10 +30,10 @@
         </Grid>
         <!--navigation control for visibility of BORDERs in (Row(1) Column(1))-->
         <Grid Grid.Row="1" Grid.Column="0">
-            <TreeView>
+            <TreeView Name="navigation_treeView" SelectedItemChanged="navigation_treeView_SelectedItemChanged">
                 <TreeViewItem Header="Global Definitions">
-                    <TreeViewItem Header="Parameters" />
-                    <TreeViewItem Header="Geometry" />
+                    <TreeViewItem Name="parameters_treeViewItem" Header="Parameters" />
+                    <TreeViewItem Name="geometry_treeViewItem" Header="Geometry" />
                 </TreeViewItem>
             </TreeView>
         </Grid>
@@ -41,7 +41,7 @@
         <Grid Grid.Row="1" Grid.Column="1">
             <!--one of these BORDERs will be visible at time, by selecting an item from navigation_treeView-->
             <!--parameters control panel-->
-            <Border Visibility="Hidden" BorderThickness="0, 0, 0.1, 0" BorderBrush="Black">
+            <Border Name="parameters_border" Visibility="Hidden" BorderThickness="0, 0, 0.1, 0" BorderBrush="Black">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="4*" />
@@ -49,12 +49,12 @@
                         <RowDefinition Height="2*" />
                     </Grid.RowDefinitions>
                     <Grid Grid.Row="0">
-                        <ListView>
+                        <ListView Name="parameters_listView" SelectionChanged="parameters_listView_SelectionChanged">
                             <ListView.View>
                                 <GridView>
-                                    <GridViewColumn Header="Name" />
-                                    <GridViewColumn Header="Value" />
-                                    <GridViewColumn Header="Description" />
+                                    <GridViewColumn Header="Name" DisplayMemberBinding="{Binding name}" />
+                                    <GridViewColumn Header="Value" DisplayMemberBinding="{Binding value}"/>
+                                    <GridViewColumn Header="Description" DisplayMemberBinding="{Binding description}"/>
                                 </GridView>
                             </ListView.View>
                         </ListView>
@@ -67,7 +67,7 @@
                                     <RowDefinition Height="1*" />
                                 </Grid.RowDefinitions>
                                 <Label Grid.Row="0" Content="Select a parameter to remove it." />
-                                <Button Grid.Row="1" Content="Remove" Width="50" Padding="1"  VerticalAlignment="Top" HorizontalAlignment="Center" IsEnabled="False"/>
+                                <Button Name="removeParameter_button" Grid.Row="1" Content="Remove" Width="50" Padding="1"  VerticalAlignment="Top" HorizontalAlignment="Center" IsEnabled="False" Click="removeParameter_button_Clicked"/>
                             </Grid>
                         </GroupBox>
                     </Grid>
@@ -80,20 +80,20 @@
                                 </Grid.RowDefinitions>
                                 <StackPanel Grid.Row="0" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" Height="auto">
                                     <Label Content="Name:" />
-                                    <TextBox Width="100" Height="20" />
+                                    <TextBox Name="newParameterName_textBox" Width="100" Height="20" />
                                     <Label Content="Value:" Margin="10, 0, 0, 0"/>
-                                    <TextBox Width="100" Height="20" />
+                                    <TextBox Name="newParameterValue_textBox" Width="100" Height="20" />
                                     <Label Content="Description:" Margin="10, 0, 0, 0"/>
-                                    <TextBox Width="100" Height="20" />
+                                    <TextBox Name="newParameterDescription_textBox" Width="100" Height="20" />
                                 </StackPanel>
-                                <Button Grid.Row="1" Content="Add" Width="50" Height="Auto" Padding="1"  VerticalAlignment="Top" HorizontalAlignment="Center" IsEnabled="False"/>
+                                <Button Grid.Row="1" Content="Add" Width="50" Height="Auto" Padding="1"  VerticalAlignment="Top" HorizontalAlignment="Center" Click="addParameter_button_Clicked"/>
                             </Grid>
                         </GroupBox>
                     </Grid>
                 </Grid>
             </Border>
             <!--geometry control panel-->
-            <Border Visibility="Hidden" BorderThickness="0, 0, 0.1, 0" BorderBrush="Black">
+            <Border Name="geometry_border" Visibility="Hidden" BorderThickness="0, 0, 0.1, 0" BorderBrush="Black">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
@@ -108,12 +108,12 @@
                                 <RowDefinition Height="1*" />
                             </Grid.RowDefinitions>
                             <Label Grid.Row="0" Content="Select a shape from below." />
-                            <ComboBox Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top" MinWidth="100"></ComboBox>
+                            <ComboBox Name="geometry_comboBox" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top" MinWidth="100" SelectionChanged="geometry_comboBox_SelectionChanged"></ComboBox>
                         </Grid>
                     </GroupBox>
                     <!--the following GRID should be visible when "Line" selected from "Shapes"' COMBOBOX-->
-                    <Grid Visibility="Hidden" Grid.Row="1">
-                        <GroupBox Header="Draw rectangle with width, height and left-top corner position" Margin="1" Padding="5">
+                    <Grid Name="drawLine_grid" Visibility="Visible" Grid.Row="1">
+                        <GroupBox Header="Draw line with two points" Margin="1" Padding="5">
                             <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="1*" />
@@ -148,7 +148,7 @@
                         </GroupBox>
                     </Grid>
                     <!--the following GRID should be visible when "Rectangle" selected from "Shapes"' COMBOBOX-->
-                    <Grid Visibility="Hidden" Grid.Row="1">
+                    <Grid Name="drawRectangle_grid" Visibility="Hidden" Grid.Row="1">
                         <GroupBox Header="Draw rectangle with width, height and left-top corner position" Margin="1" Padding="5">
                             <Grid>
                                 <Grid.RowDefinitions>
@@ -184,8 +184,8 @@
                         </GroupBox>
                     </Grid>
                     <!--the following GRID should be visible when "Ellipse" selected from "Shapes"' COMBOBOX-->
-                    <Grid Visibility="Hidden" Grid.Row="1">
-                        <GroupBox Header="Draw ellipse with long diameter, short diameter as center position" Margin="1" Padding="5">
+                    <Grid Name="drawEllipse_grid" Visibility="Hidden" Grid.Row="1">
+                        <GroupBox Header="Draw ellipse with long diameter, short diameter and center position" Margin="1" Padding="5">
                             <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="1*" />
