@@ -22,22 +22,17 @@ namespace COMSOL
     /// </summary>
     public partial class MainWindow : Window
     {
-        List<Parameter> parameters = new List<Parameter>();
-        List<string> shapesNames = new List<string>();
+        Data data = new Data();
         public MainWindow()
         {
             InitializeComponent();
 
             // set parameters_listView
-            parameters_listView.ItemsSource = parameters;
+            parameters_listView.ItemsSource = data.GetParameters();
             parameters_listView.Items.Refresh();
 
             // set geometry_comboBox
-            shapesNames.Add("--Select--");
-            shapesNames.Add("Line");
-            shapesNames.Add("Rectangle");
-            shapesNames.Add("Ellipse");
-            geometry_comboBox.ItemsSource = shapesNames;
+            geometry_comboBox.ItemsSource = data.GetShapesNames();
             geometry_comboBox.SelectedIndex = 0;
             geometry_comboBox.Items.Refresh();
             
@@ -92,7 +87,7 @@ namespace COMSOL
         private void removeParameter_button_Clicked(object sender, RoutedEventArgs e)
         {
             Parameter selectedParameter = parameters_listView.SelectedItem as Parameter;
-            parameters.Remove(selectedParameter);
+            data.removeParameter(selectedParameter);
             parameters_listView.Items.Refresh();
             removeParameter_button.IsEnabled = false;
         }
@@ -105,9 +100,9 @@ namespace COMSOL
                 string newParameterName = newParameterName_textBox.Text;
                 valid = valid && (newParameterName != null);
                 List<string> names = new List<string>();
-                if (parameters.Count > 0)
+                if (data.GetParameters().Count > 0)
                 {
-                    foreach (Parameter parameter in parameters)
+                    foreach (Parameter parameter in data.GetParameters())
                     {
                         names.Add(parameter.name);
                     }
@@ -117,7 +112,7 @@ namespace COMSOL
                 string newParameterDescription = newParameterDescription_textBox.Text;
                 if (valid)
                 {
-                    parameters.Add(new Parameter { name = newParameterName, value = newParameterValue, description = newParameterDescription });
+                    data.addParameter(new Parameter { name = newParameterName, value = newParameterValue, description = newParameterDescription});
                     parameters_listView.Items.Refresh();
                 }
                 else
