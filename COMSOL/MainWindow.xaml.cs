@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+using NumSharp;
+
 using COMSOL.com;
 
 namespace COMSOL
@@ -35,6 +37,12 @@ namespace COMSOL
             geometry_comboBox.ItemsSource = data.GetShapesNames();
             geometry_comboBox.SelectedIndex = 0;
             geometry_comboBox.Items.Refresh();
+
+            // Numsharp Test
+            var x = np.arange(0, 1, 0.1);
+            var y = np.cosh(x);
+
+            MessageBox.Show(y.ToString());
             
 
         }
