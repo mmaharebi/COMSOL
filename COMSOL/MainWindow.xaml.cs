@@ -24,7 +24,12 @@ namespace COMSOL
     /// </summary>
     public partial class MainWindow : Window
     {
-        Data data = new Data();
+        // Data management class instance
+        private Data data = new Data();
+
+        // to know wich "Select Parameter" button clicked
+        private string targetTextBox;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -38,13 +43,9 @@ namespace COMSOL
             geometry_comboBox.SelectedIndex = 0;
             geometry_comboBox.Items.Refresh();
 
-            // Numsharp Test
-            var x = np.arange(0, 1, 0.1);
-            var y = np.cosh(x);
-
-            MessageBox.Show(y.ToString());
-            
-
+            // set selectParameter_listView
+            selectParameter_listView.ItemsSource = data.GetParameters();
+            selectParameter_listView.Items.Refresh();
         }
 
         private void exit_menuItem_Clicked(object sender, RoutedEventArgs e)
@@ -120,17 +121,17 @@ namespace COMSOL
                 string newParameterDescription = newParameterDescription_textBox.Text;
                 if (valid)
                 {
-                    data.addParameter(new Parameter { name = newParameterName, value = newParameterValue, description = newParameterDescription});
+                    data.addParameter(new Parameter { name = newParameterName, value = newParameterValue, description = newParameterDescription });
                     parameters_listView.Items.Refresh();
                 }
                 else
                 {
-                    MessageBox.Show("Inputs are not valid.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("Inputs are not valid.", "", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
             catch (Exception)
             {
-                MessageBox.Show("Something is wrong.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Something is wrong.", "", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -153,6 +154,69 @@ namespace COMSOL
                     break;
                 default:
                     break;
+            }
+        }
+
+        private void selectParameter_button_Clicked(object sender, RoutedEventArgs e)
+        {
+            selectParameter_ToggleVisiblity();
+            string senderName = (sender as Button).Name.ToString();
+
+            List<int> endPositions = GetCharPositions(senderName, '_');
+
+            targetTextBox = senderName[0..(endPositions[1])] + "_textBox";
+
+        }
+
+        private void selectParameter_ToggleVisiblity()
+        {
+            selectParameter_listView.Items.Refresh();
+            if (selectParameter_grid.Visibility == Visibility.Hidden)
+            {
+                selectParameter_grid.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                selectParameter_grid.Visibility = Visibility.Hidden;
+            }
+        }
+
+        private List<int> GetCharPositions(string str, char chr)
+        {
+            List<int> chrPositions = new List<int>();
+            for (int i = 0; i < str.Length; i++)
+            {
+                if (str[i] == chr)
+                {
+                    chrPositions.Add(i);
+                }
+            }
+            return new List<int>(chrPositions);
+        }
+
+        private void selectParameter_listView_DoubleClicked(object sender, MouseButtonEventArgs e)
+        {
+            try
+            {
+                // check if situation is valid
+                bool isValid = true;
+                isValid &= (selectParameter_listView.SelectedItem != null);
+
+                if (isValid)
+                {
+                    Parameter selectedParameter = selectParameter_listView.SelectedItem as Parameter;
+                    (this.FindName(targetTextBox) as TextBox).Text = selectedParameter.value.ToString();
+                }
+                else
+                {
+                    MessageBox.Show("Something is wrong", "", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Something is wrong", "", MessageBoxButton.OK, MessageBoxImage.Error);
+                throw;
             }
         }
     }

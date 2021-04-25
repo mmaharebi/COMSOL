@@ -93,7 +93,7 @@
                 </Grid>
             </Border>
             <!--geometry control panel-->
-            <Border Name="geometry_border" Visibility="Visible" BorderThickness="0, 0, 0.1, 0" BorderBrush="Black">
+            <Border Name="geometry_border" Visibility="Hidden" BorderThickness="0, 0, 0.1, 0" BorderBrush="Black">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
@@ -132,17 +132,17 @@
                                     <ColumnDefinition Width="4*" />
                                 </Grid.ColumnDefinitions>
                                 <Label Grid.Row="0" Grid.Column="0" Content="X1:" HorizontalAlignment="Right" VerticalAlignment="Center" />
-                                <TextBox Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" />
-                                <Button Grid.Row="0" Grid.Column="3" Content="Parameters" VerticalAlignment="Center" />
+                                <TextBox Name="line_X1_textBox" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" />
+                                <Button Name="line_X1_button" Grid.Row="0" Grid.Column="3" Content="Parameters" VerticalAlignment="Center" Click="selectParameter_button_Clicked" />
                                 <Label Grid.Row="0" Grid.Column="5" Content="Y1:" HorizontalAlignment="Right" VerticalAlignment="Center" />
-                                <TextBox Grid.Row="0" Grid.Column="6" VerticalAlignment="Center" />
-                                <Button Grid.Row="0" Grid.Column="8" Content="Parameters" Height="Auto" VerticalAlignment="Center" />
+                                <TextBox Name="line_Y1_textBox" Grid.Row="0" Grid.Column="6" VerticalAlignment="Center" />
+                                <Button Name="line_Y1_button" Grid.Row="0" Grid.Column="8" Content="Parameters" Height="Auto" VerticalAlignment="Center" Click="selectParameter_button_Clicked" />
                                 <Label Grid.Row="1" Grid.Column="0" Content="X2:" HorizontalAlignment="Right" VerticalAlignment="Center" />
-                                <TextBox Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" />
-                                <Button Grid.Row="1" Grid.Column="3" Content="Parameters" Height="Auto" VerticalAlignment="Center" />
+                                <TextBox Name="line_X2_textBox" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" />
+                                <Button Name="line_X2_button" Grid.Row="1" Grid.Column="3" Content="Parameters" Height="Auto" VerticalAlignment="Center" Click="selectParameter_button_Clicked" />
                                 <Label Grid.Row="1" Grid.Column="5" Content="Y2:" HorizontalAlignment="Right" VerticalAlignment="Center" />
-                                <TextBox Grid.Row="1" Grid.Column="6" VerticalAlignment="Center" />
-                                <Button Grid.Row="1" Grid.Column="8" Content="Parameters" Height="Auto" VerticalAlignment="Center" />
+                                <TextBox Name="line_Y2_textBox" Grid.Row="1" Grid.Column="6" VerticalAlignment="Center" />
+                                <Button Name="line_Y2_button" Grid.Row="1" Grid.Column="8" Content="Parameters" Height="Auto" VerticalAlignment="Center" Click="selectParameter_button_Clicked" />
                                 <Button Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="9" Content="Draw" Width="50" Height="Auto" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="1"/>
                             </Grid>
                         </GroupBox>
@@ -168,17 +168,17 @@
                                     <ColumnDefinition Width="4*" />
                                 </Grid.ColumnDefinitions>
                                 <Label Grid.Row="0" Grid.Column="0" Content="Width:" HorizontalAlignment="Right" VerticalAlignment="Center" />
-                                <TextBox Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" />
-                                <Button Grid.Row="0" Grid.Column="3" Content="Parameters" VerticalAlignment="Center" />
+                                <TextBox Name="rectangle_width_textBox" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" />
+                                <Button Name="rectangle_width_button" Grid.Row="0" Grid.Column="3" Content="Parameters" VerticalAlignment="Center" Click="selectParameter_button_Clicked" />
                                 <Label Grid.Row="0" Grid.Column="5" Content="Height:" HorizontalAlignment="Right" VerticalAlignment="Center" />
-                                <TextBox Grid.Row="0" Grid.Column="6" VerticalAlignment="Center" />
-                                <Button Grid.Row="0" Grid.Column="8" Content="Parameters" Height="Auto" VerticalAlignment="Center" />
+                                <TextBox Name="rectangle_height_textBox" Grid.Row="0" Grid.Column="6" VerticalAlignment="Center" />
+                                <Button Name="rectangle_height_button" Grid.Row="0" Grid.Column="8" Content="Parameters" Height="Auto" VerticalAlignment="Center" Click="selectParameter_button_Clicked" />
                                 <Label Grid.Row="1" Grid.Column="0" Content="X:" HorizontalAlignment="Right" VerticalAlignment="Center" />
-                                <TextBox Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" />
-                                <Button Grid.Row="1" Grid.Column="3" Content="Parameters" Height="Auto" VerticalAlignment="Center" />
+                                <TextBox Name="rectangle_X_textBox" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" />
+                                <Button Name="rectangle_X_button" Grid.Row="1" Grid.Column="3" Content="Parameters" Height="Auto" VerticalAlignment="Center" Click="selectParameter_button_Clicked" />
                                 <Label Grid.Row="1" Grid.Column="5" Content="Y:" HorizontalAlignment="Right" VerticalAlignment="Center" />
-                                <TextBox Grid.Row="1" Grid.Column="6" VerticalAlignment="Center" />
-                                <Button Grid.Row="1" Grid.Column="8" Content="Parameters" Height="Auto" VerticalAlignment="Center" />
+                                <TextBox Name="rectangle_Y_textBox" Grid.Row="1" Grid.Column="6" VerticalAlignment="Center" />
+                                <Button Name="rectangle_Y_button" Grid.Row="1" Grid.Column="8" Content="Parameters" Height="Auto" VerticalAlignment="Center" Click="selectParameter_button_Clicked" />
                                 <Button Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="9" Content="Draw" Width="50" Height="Auto" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="1"/>
                             </Grid>
                         </GroupBox>
@@ -204,17 +204,17 @@
                                     <ColumnDefinition Width="4*" />
                                 </Grid.ColumnDefinitions>
                                 <Label Grid.Row="0" Grid.Column="0" Content="D:" HorizontalAlignment="Right" VerticalAlignment="Center" />
-                                <TextBox Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" />
-                                <Button Grid.Row="0" Grid.Column="3" Content="Parameters" VerticalAlignment="Center" />
+                                <TextBox Name="ellipse_D_textBox" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" />
+                                <Button Name="ellipse_D_button" Grid.Row="0" Grid.Column="3" Content="Parameters" VerticalAlignment="Center" Click="selectParameter_button_Clicked" />
                                 <Label Grid.Row="0" Grid.Column="5" Content="d:" HorizontalAlignment="Right" VerticalAlignment="Center" />
-                                <TextBox Grid.Row="0" Grid.Column="6" VerticalAlignment="Center" />
-                                <Button Grid.Row="0" Grid.Column="8" Content="Parameters" Height="Auto" VerticalAlignment="Center" />
+                                <TextBox Name="eliipse_d_textBox" Grid.Row="0" Grid.Column="6" VerticalAlignment="Center" />
+                                <Button Name="ellipse_d_button"  Grid.Row="0" Grid.Column="8" Content="Parameters" Height="Auto" VerticalAlignment="Center" Click="selectParameter_button_Clicked" />
                                 <Label Grid.Row="1" Grid.Column="0" Content="X:" HorizontalAlignment="Right" VerticalAlignment="Center" />
-                                <TextBox Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" />
-                                <Button Grid.Row="1" Grid.Column="3" Content="Parameters" Height="Auto" VerticalAlignment="Center" />
+                                <TextBox Name="ellipse_X_textBox" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" />
+                                <Button Name="ellipse_X_button" Grid.Row="1" Grid.Column="3" Content="Parameters" Height="Auto" VerticalAlignment="Center" Click="selectParameter_button_Clicked" />
                                 <Label Grid.Row="1" Grid.Column="5" Content="Y:" HorizontalAlignment="Right" VerticalAlignment="Center" />
-                                <TextBox Grid.Row="1" Grid.Column="6" VerticalAlignment="Center" />
-                                <Button Grid.Row="1" Grid.Column="8" Content="Parameters" Height="Auto" VerticalAlignment="Center" />
+                                <TextBox Name="ellipse_Y_textBox" Grid.Row="1" Grid.Column="6" VerticalAlignment="Center" />
+                                <Button Name="ellipse_Y_button" Grid.Row="1" Grid.Column="8" Content="Parameters" Height="Auto" VerticalAlignment="Center" Click="selectParameter_button_Clicked" />
                                 <Button Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="9" Content="Draw" Width="50" Height="Auto" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="1"/>
                             </Grid>
                         </GroupBox>
@@ -226,16 +226,8 @@
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="20*" />
                                     <RowDefinition Height="1*" />
-                                    <RowDefinition Height="3*" />
-                                    <RowDefinition Height="2*" />
                                 </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="1*" />
-                                    <ColumnDefinition Width="1*" />
-                                    <ColumnDefinition Width="1*" />
-                                    <ColumnDefinition Width="1*" />
-                                </Grid.ColumnDefinitions>
-                                <ListView Name="selectParameter_listView" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5">
+                                <ListView Name="selectParameter_listView" Grid.Row="0" MouseDoubleClick="selectParameter_listView_DoubleClicked">
                                     <ListView.View>
                                         <GridView>
                                             <GridViewColumn Header="Name" DisplayMemberBinding="{Binding name}" />
@@ -244,12 +236,9 @@
                                         </GridView>
                                     </ListView.View>
                                 </ListView>
-                                <Button Grid.Row="2" Grid.Column="1" Content="OK" Width="50" HorizontalAlignment="Center" VerticalAlignment="Center" IsEnabled="False" />
-                                <Button Grid.Row="2" Grid.Column="2" Content="Cancel" Width="50" HorizontalAlignment="Center" VerticalAlignment="Center" />
                             </Grid>
                         </GroupBox>
                     </Grid>
-                    
                 </Grid>
             </Border>
         </Grid>
