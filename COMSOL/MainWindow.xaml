@@ -93,14 +93,14 @@
                 </Grid>
             </Border>
             <!--geometry control panel-->
-            <Border Name="geometry_border" Visibility="Hidden" BorderThickness="0, 0, 0.1, 0" BorderBrush="Black">
+            <Border Name="geometry_border" Visibility="Visible" BorderThickness="0, 0, 0.1, 0" BorderBrush="Black">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="1*" />
-                        <RowDefinition Height="1*" />
-                        <RowDefinition Height="1*" />
+                        <RowDefinition Height="2*" />
                     </Grid.RowDefinitions>
+                    <!--this GROUPEBOX's visibility is controlled by "geometry_border" visiblity-->
                     <GroupBox Header="Shapes" Margin="1" Padding="5">
                         <Grid>
                             <Grid.RowDefinitions>
@@ -112,7 +112,7 @@
                         </Grid>
                     </GroupBox>
                     <!--the following GRID should be visible when "Line" selected from "Shapes"' COMBOBOX-->
-                    <Grid Name="drawLine_grid" Visibility="Visible" Grid.Row="1">
+                    <Grid Name="drawLine_grid" Visibility="Hidden" Grid.Row="1">
                         <GroupBox Header="Draw line with two points" Margin="1" Padding="5">
                             <Grid>
                                 <Grid.RowDefinitions>
@@ -133,16 +133,16 @@
                                 </Grid.ColumnDefinitions>
                                 <Label Grid.Row="0" Grid.Column="0" Content="X1:" HorizontalAlignment="Right" VerticalAlignment="Center" />
                                 <TextBox Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" />
-                                <Button Grid.Row="0" Grid.Column="3" Content="Parameters..." VerticalAlignment="Center" />
+                                <Button Grid.Row="0" Grid.Column="3" Content="Parameters" VerticalAlignment="Center" />
                                 <Label Grid.Row="0" Grid.Column="5" Content="Y1:" HorizontalAlignment="Right" VerticalAlignment="Center" />
                                 <TextBox Grid.Row="0" Grid.Column="6" VerticalAlignment="Center" />
-                                <Button Grid.Row="0" Grid.Column="8" Content="Parameters..." Height="Auto" VerticalAlignment="Center" />
+                                <Button Grid.Row="0" Grid.Column="8" Content="Parameters" Height="Auto" VerticalAlignment="Center" />
                                 <Label Grid.Row="1" Grid.Column="0" Content="X2:" HorizontalAlignment="Right" VerticalAlignment="Center" />
                                 <TextBox Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" />
-                                <Button Grid.Row="1" Grid.Column="3" Content="Parameters..." Height="Auto" VerticalAlignment="Center" />
+                                <Button Grid.Row="1" Grid.Column="3" Content="Parameters" Height="Auto" VerticalAlignment="Center" />
                                 <Label Grid.Row="1" Grid.Column="5" Content="Y2:" HorizontalAlignment="Right" VerticalAlignment="Center" />
                                 <TextBox Grid.Row="1" Grid.Column="6" VerticalAlignment="Center" />
-                                <Button Grid.Row="1" Grid.Column="8" Content="Parameters..." Height="Auto" VerticalAlignment="Center" />
+                                <Button Grid.Row="1" Grid.Column="8" Content="Parameters" Height="Auto" VerticalAlignment="Center" />
                                 <Button Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="9" Content="Draw" Width="50" Height="Auto" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="1"/>
                             </Grid>
                         </GroupBox>
@@ -169,16 +169,16 @@
                                 </Grid.ColumnDefinitions>
                                 <Label Grid.Row="0" Grid.Column="0" Content="Width:" HorizontalAlignment="Right" VerticalAlignment="Center" />
                                 <TextBox Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" />
-                                <Button Grid.Row="0" Grid.Column="3" Content="Parameters..." VerticalAlignment="Center" />
+                                <Button Grid.Row="0" Grid.Column="3" Content="Parameters" VerticalAlignment="Center" />
                                 <Label Grid.Row="0" Grid.Column="5" Content="Height:" HorizontalAlignment="Right" VerticalAlignment="Center" />
                                 <TextBox Grid.Row="0" Grid.Column="6" VerticalAlignment="Center" />
-                                <Button Grid.Row="0" Grid.Column="8" Content="Parameters..." Height="Auto" VerticalAlignment="Center" />
+                                <Button Grid.Row="0" Grid.Column="8" Content="Parameters" Height="Auto" VerticalAlignment="Center" />
                                 <Label Grid.Row="1" Grid.Column="0" Content="X:" HorizontalAlignment="Right" VerticalAlignment="Center" />
                                 <TextBox Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" />
-                                <Button Grid.Row="1" Grid.Column="3" Content="Parameters..." Height="Auto" VerticalAlignment="Center" />
+                                <Button Grid.Row="1" Grid.Column="3" Content="Parameters" Height="Auto" VerticalAlignment="Center" />
                                 <Label Grid.Row="1" Grid.Column="5" Content="Y:" HorizontalAlignment="Right" VerticalAlignment="Center" />
                                 <TextBox Grid.Row="1" Grid.Column="6" VerticalAlignment="Center" />
-                                <Button Grid.Row="1" Grid.Column="8" Content="Parameters..." Height="Auto" VerticalAlignment="Center" />
+                                <Button Grid.Row="1" Grid.Column="8" Content="Parameters" Height="Auto" VerticalAlignment="Center" />
                                 <Button Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="9" Content="Draw" Width="50" Height="Auto" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="1"/>
                             </Grid>
                         </GroupBox>
@@ -205,20 +205,51 @@
                                 </Grid.ColumnDefinitions>
                                 <Label Grid.Row="0" Grid.Column="0" Content="D:" HorizontalAlignment="Right" VerticalAlignment="Center" />
                                 <TextBox Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" />
-                                <Button Grid.Row="0" Grid.Column="3" Content="Parameters..." VerticalAlignment="Center" />
+                                <Button Grid.Row="0" Grid.Column="3" Content="Parameters" VerticalAlignment="Center" />
                                 <Label Grid.Row="0" Grid.Column="5" Content="d:" HorizontalAlignment="Right" VerticalAlignment="Center" />
                                 <TextBox Grid.Row="0" Grid.Column="6" VerticalAlignment="Center" />
-                                <Button Grid.Row="0" Grid.Column="8" Content="Parameters..." Height="Auto" VerticalAlignment="Center" />
+                                <Button Grid.Row="0" Grid.Column="8" Content="Parameters" Height="Auto" VerticalAlignment="Center" />
                                 <Label Grid.Row="1" Grid.Column="0" Content="X:" HorizontalAlignment="Right" VerticalAlignment="Center" />
                                 <TextBox Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" />
-                                <Button Grid.Row="1" Grid.Column="3" Content="Parameters..." Height="Auto" VerticalAlignment="Center" />
+                                <Button Grid.Row="1" Grid.Column="3" Content="Parameters" Height="Auto" VerticalAlignment="Center" />
                                 <Label Grid.Row="1" Grid.Column="5" Content="Y:" HorizontalAlignment="Right" VerticalAlignment="Center" />
                                 <TextBox Grid.Row="1" Grid.Column="6" VerticalAlignment="Center" />
-                                <Button Grid.Row="1" Grid.Column="8" Content="Parameters..." Height="Auto" VerticalAlignment="Center" />
+                                <Button Grid.Row="1" Grid.Column="8" Content="Parameters" Height="Auto" VerticalAlignment="Center" />
                                 <Button Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="9" Content="Draw" Width="50" Height="Auto" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="1"/>
                             </Grid>
                         </GroupBox>
                     </Grid>
+                    <!--the following GRID should be visible when "Parameters" BUTTON clicked from any draw GRID-->
+                    <Grid Name="selectParameter_grid" Visibility="Hidden" Grid.Row="2">
+                        <GroupBox Header="Select Parameter" Margin="1" Padding="5">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="20*" />
+                                    <RowDefinition Height="1*" />
+                                    <RowDefinition Height="3*" />
+                                    <RowDefinition Height="2*" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1*" />
+                                    <ColumnDefinition Width="1*" />
+                                    <ColumnDefinition Width="1*" />
+                                    <ColumnDefinition Width="1*" />
+                                </Grid.ColumnDefinitions>
+                                <ListView Name="selectParameter_listView" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5">
+                                    <ListView.View>
+                                        <GridView>
+                                            <GridViewColumn Header="Name" DisplayMemberBinding="{Binding name}" />
+                                            <GridViewColumn Header="Value" DisplayMemberBinding="{Binding value}"/>
+                                            <GridViewColumn Header="Description" DisplayMemberBinding="{Binding description}"/>
+                                        </GridView>
+                                    </ListView.View>
+                                </ListView>
+                                <Button Grid.Row="2" Grid.Column="1" Content="OK" Width="50" HorizontalAlignment="Center" VerticalAlignment="Center" IsEnabled="False" />
+                                <Button Grid.Row="2" Grid.Column="2" Content="Cancel" Width="50" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            </Grid>
+                        </GroupBox>
+                    </Grid>
+                    
                 </Grid>
             </Border>
         </Grid>
