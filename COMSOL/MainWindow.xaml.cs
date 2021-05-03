@@ -129,9 +129,9 @@ namespace COMSOL
                     MessageBox.Show("Inputs are not valid.", "", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
-            catch (Exception)
+            catch (Exception exception)
             {
-                MessageBox.Show("Something is wrong.", "", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Something is wrong\n" + exception.ToString(), "", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -159,13 +159,134 @@ namespace COMSOL
 
         private void selectParameter_button_Clicked(object sender, RoutedEventArgs e)
         {
-            selectParameter_ToggleVisiblity();
-            string senderName = (sender as Button).Name.ToString();
+            // selectParameter_ToggleVisiblity();
+            selectParameter_grid.Visibility = Visibility.Visible;
+
+            string senderName = (sender as Button).Name;
 
             List<int> endPositions = GetCharPositions(senderName, '_');
 
             targetTextBox = senderName[0..(endPositions[1])] + "_textBox";
 
+        }
+
+        private void selectParameter_listView_DoubleClicked(object sender, MouseButtonEventArgs e)
+        {
+            try
+            {
+                // check if situation is valid
+                bool isValid = true;
+                isValid &= (selectParameter_listView.SelectedItem != null);
+
+                if (isValid)
+                {
+                    Parameter selectedParameter = selectParameter_listView.SelectedItem as Parameter;
+                    (this.FindName(targetTextBox) as TextBox).Text = selectedParameter.value.ToString();
+                }
+                else
+                {
+                    MessageBox.Show("Something is wrong", "", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Something is wrong\n" + exception.ToString(), "", MessageBoxButton.OK, MessageBoxImage.Error);
+                throw;
+            }
+            finally
+            {
+                selectParameter_grid.Visibility = Visibility.Hidden;
+            }
+        }
+
+        private void drawShape_button_Clicked(object sender, RoutedEventArgs e)
+        {
+            string senderName = (sender as Button).Name;
+            List<int> endPositions = GetCharPositions(senderName, '_');
+            string shapeName = senderName.Substring(endPositions[0] + 1, (endPositions[1] - endPositions[0] - 1));
+            drawShape(shapeName);
+        }
+
+        private void drawShape(string shapeName)
+        {
+            // this list should be gettable from "Data" class
+            List<string> shapeNames = new List<string> { "line", "rectangle", "ellipse" };
+
+            try
+            {
+                // check if shape's data is valid
+                bool isValid = true;
+                isValid &= (shapeNames.Contains(shapeName));
+
+                var stroke = Brushes.Black;
+                var strokeThickness = 1;
+                var fill = Brushes.GhostWhite;
+
+
+                if (isValid)
+                {
+                    switch (shapeName)
+                    {
+                        case "line":
+                            Line line = new Line();
+                            // here
+                            line.X1 = (5 / 9) * 1200 + Convert.ToDouble(line_X1_textBox.Text);
+                            line.X2 = (5 / 9) * 1200 + Convert.ToDouble(line_X2_textBox.Text);
+                            line.Y1 = 20 + Convert.ToDouble(line_Y1_textBox.Text);
+                            line.Y2 = 20 + Convert.ToDouble(line_Y2_textBox.Text);
+
+                            line.Stroke = stroke;
+                            line.StrokeThickness = strokeThickness;
+                            line.Fill = fill;
+
+                            shapes_canvas.Children.Add(line);
+                            line.UpdateLayout();
+                            shapes_canvas.UpdateLayout();
+
+                            break;
+                        
+                        case "rectangle":
+                            Rectangle rectangle = new System.Windows.Shapes.Rectangle();
+                            // here
+                            rectangle.Width = Convert.ToDouble(rectangle_width_textBox.Text);
+                            rectangle.Height = Convert.ToDouble(rectangle_height_textBox.Text);
+                            Canvas.SetLeft(rectangle, Convert.ToDouble(rectangle_X_textBox.Text));
+                            Canvas.SetTop(rectangle, Convert.ToDouble(rectangle_Y_textBox.Text));
+
+                            rectangle.Stroke = stroke;
+                            rectangle.StrokeThickness = strokeThickness;
+                            rectangle.Fill = fill;
+
+                            shapes_canvas.Children.Add(rectangle);
+                            
+                            break;
+
+                        case "ellipse":
+                            Ellipse ellipse = new Ellipse();
+                            ellipse.Width = Convert.ToDouble(ellipse_D_textBox.Text);
+                            ellipse.Height = Convert.ToDouble(ellipse_d_textBox.Text);
+                            Canvas.SetLeft(ellipse, Convert.ToDouble(ellipse_X_textBox.Text) - ellipse.Width / 2);
+                            Canvas.SetTop(ellipse, Convert.ToDouble(ellipse_Y_textBox.Text) - ellipse.Height / 2);
+
+                            ellipse.Stroke = stroke;
+                            ellipse.StrokeThickness = strokeThickness;
+                            ellipse.Fill = fill;
+
+                            shapes_canvas.Children.Add(ellipse);
+
+                            break;
+                        default:
+                            break;
+                    }
+                }
+
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Something is wrong\n" + exception.ToString(), "", MessageBoxButton.OK, MessageBoxImage.Error);
+                throw;
+            }
         }
 
         private void selectParameter_ToggleVisiblity()
@@ -192,32 +313,6 @@ namespace COMSOL
                 }
             }
             return new List<int>(chrPositions);
-        }
-
-        private void selectParameter_listView_DoubleClicked(object sender, MouseButtonEventArgs e)
-        {
-            try
-            {
-                // check if situation is valid
-                bool isValid = true;
-                isValid &= (selectParameter_listView.SelectedItem != null);
-
-                if (isValid)
-                {
-                    Parameter selectedParameter = selectParameter_listView.SelectedItem as Parameter;
-                    (this.FindName(targetTextBox) as TextBox).Text = selectedParameter.value.ToString();
-                }
-                else
-                {
-                    MessageBox.Show("Something is wrong", "", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("Something is wrong", "", MessageBoxButton.OK, MessageBoxImage.Error);
-                throw;
-            }
         }
     }
 }

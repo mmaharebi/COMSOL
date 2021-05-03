@@ -143,7 +143,7 @@
                                 <Label Grid.Row="1" Grid.Column="5" Content="Y2:" HorizontalAlignment="Right" VerticalAlignment="Center" />
                                 <TextBox Name="line_Y2_textBox" Grid.Row="1" Grid.Column="6" VerticalAlignment="Center" />
                                 <Button Name="line_Y2_button" Grid.Row="1" Grid.Column="8" Content="Parameters" Height="Auto" VerticalAlignment="Center" Click="selectParameter_button_Clicked" />
-                                <Button Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="9" Content="Draw" Width="50" Height="Auto" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="1"/>
+                                <Button Name="draw_line_button" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="9" Content="Draw" Width="50" Height="Auto" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="1" Click="drawShape_button_Clicked" />
                             </Grid>
                         </GroupBox>
                     </Grid>
@@ -179,7 +179,7 @@
                                 <Label Grid.Row="1" Grid.Column="5" Content="Y:" HorizontalAlignment="Right" VerticalAlignment="Center" />
                                 <TextBox Name="rectangle_Y_textBox" Grid.Row="1" Grid.Column="6" VerticalAlignment="Center" />
                                 <Button Name="rectangle_Y_button" Grid.Row="1" Grid.Column="8" Content="Parameters" Height="Auto" VerticalAlignment="Center" Click="selectParameter_button_Clicked" />
-                                <Button Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="9" Content="Draw" Width="50" Height="Auto" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="1"/>
+                                <Button Name="draw_rectangle_button" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="9" Content="Draw" Width="50" Height="Auto" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="1" Click="drawShape_button_Clicked" />
                             </Grid>
                         </GroupBox>
                     </Grid>
@@ -207,7 +207,7 @@
                                 <TextBox Name="ellipse_D_textBox" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" />
                                 <Button Name="ellipse_D_button" Grid.Row="0" Grid.Column="3" Content="Parameters" VerticalAlignment="Center" Click="selectParameter_button_Clicked" />
                                 <Label Grid.Row="0" Grid.Column="5" Content="d:" HorizontalAlignment="Right" VerticalAlignment="Center" />
-                                <TextBox Name="eliipse_d_textBox" Grid.Row="0" Grid.Column="6" VerticalAlignment="Center" />
+                                <TextBox Name="ellipse_d_textBox" Grid.Row="0" Grid.Column="6" VerticalAlignment="Center" />
                                 <Button Name="ellipse_d_button"  Grid.Row="0" Grid.Column="8" Content="Parameters" Height="Auto" VerticalAlignment="Center" Click="selectParameter_button_Clicked" />
                                 <Label Grid.Row="1" Grid.Column="0" Content="X:" HorizontalAlignment="Right" VerticalAlignment="Center" />
                                 <TextBox Name="ellipse_X_textBox" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" />
@@ -215,7 +215,7 @@
                                 <Label Grid.Row="1" Grid.Column="5" Content="Y:" HorizontalAlignment="Right" VerticalAlignment="Center" />
                                 <TextBox Name="ellipse_Y_textBox" Grid.Row="1" Grid.Column="6" VerticalAlignment="Center" />
                                 <Button Name="ellipse_Y_button" Grid.Row="1" Grid.Column="8" Content="Parameters" Height="Auto" VerticalAlignment="Center" Click="selectParameter_button_Clicked" />
-                                <Button Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="9" Content="Draw" Width="50" Height="Auto" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="1"/>
+                                <Button Name="draw_ellipse_button" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="9" Content="Draw" Width="50" Height="Auto" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="1" Click="drawShape_button_Clicked" />
                             </Grid>
                         </GroupBox>
                     </Grid>
@@ -243,7 +243,8 @@
             </Border>
         </Grid>
         <Grid Grid.Row="1" Grid.Column="2">
-            <Canvas></Canvas>
+            <Canvas Name="shapes_canvas" Background="Azure">
+            </Canvas>
         </Grid>
     </Grid>
 </Window>
