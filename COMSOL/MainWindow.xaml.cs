@@ -33,15 +33,24 @@ namespace COMSOL
         public MainWindow()
         {
             InitializeComponent();
+            primarySettings();
+        }
 
+        private void primarySettings()
+        {
             // set parameters_listView
             parameters_listView.ItemsSource = data.GetParameters();
             parameters_listView.Items.Refresh();
 
             // set newParameterUnitScale_comboBox
-            newParameterUnitScale_comboBox.ItemsSource = data.GetUnits();
+            List<string> unitNames = new List<string>();
+            foreach (Unit unit in data.GetUnits())
+            {
+                unitNames.Add(unit.name);
+            }
+            newParameterUnitScale_comboBox.ItemsSource = unitNames;
             newParameterUnitScale_comboBox.Items.Refresh();
-            newParameterUnitScale_comboBox.SelectedIndex = data.GetUnits().IndexOf("--Select--");
+            newParameterUnitScale_comboBox.SelectedItem = unitNames[10];
 
             // set geometry_comboBox
             geometry_comboBox.ItemsSource = data.GetShapesNames();
@@ -118,6 +127,9 @@ namespace COMSOL
             {
                 bool valid = true;
                 string newParameterName = newParameterName_textBox.Text;
+                string newParameterUnitScaleName = newParameterUnitScale_comboBox.SelectedItem.ToString();
+                double newParameterUnitScaleNumber = data.GetUnits()[data.GetUnits().FindIndex(unit => unit.name == newParameterUnitScaleName)].number;
+
                 valid = valid && (newParameterName != null);
                 List<string> names = new List<string>();
                 if (data.GetParameters().Count > 0)
@@ -129,6 +141,7 @@ namespace COMSOL
                 }
                 valid = valid && (names.IndexOf(newParameterName) == -1);
                 double newParameterValue = Convert.ToDouble(newParameterValue_textBox.Text);
+                newParameterValue *= newParameterUnitScaleNumber;
                 string newParameterDescription = newParameterDescription_textBox.Text;
                 if (valid)
                 {

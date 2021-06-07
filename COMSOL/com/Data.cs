@@ -14,14 +14,19 @@ namespace COMSOL.com
     class Data
     {
         private string parametersPath = Path.Combine(Directory.GetCurrentDirectory(), "../../../com/data/parameters.json");
+        
         private string shapesNamesPath = Path.Combine(Directory.GetCurrentDirectory(), "../../../com/data/shapes_names.json"); // readonly
+        
         private string unitsPath = Path.Combine(Directory.GetCurrentDirectory(), "../../../com/data/units.json"); // readonly
 
         private List<Parameter> Parameters = new List<Parameter>();
+        private List<Unit> Units = new List<Unit>();
+
         private List<string> ShapesNames = new List<string>();
-        private List<string> Units = new List<string>();
+
 
         private List<Point> points = new List<Point>();
+
 
         public Data()
         {
@@ -58,7 +63,7 @@ namespace COMSOL.com
             return ShapesNames;
         }
 
-        public List<string> GetUnits()
+        public List<Unit> GetUnits()
         {
             return Units;
         }
@@ -67,7 +72,7 @@ namespace COMSOL.com
         {
             Parameters = JsonSerializer.Deserialize<List<Parameter>>(File.ReadAllText(parametersPath));
             ShapesNames = JsonSerializer.Deserialize<List<string>>(File.ReadAllText(shapesNamesPath));
-            Units = JsonSerializer.Deserialize<List<string>>(File.ReadAllText(unitsPath));
+            Units = JsonSerializer.Deserialize<List<Unit>>(File.ReadAllText(unitsPath));
         }
         private void writeData()
         {

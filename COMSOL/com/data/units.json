@@ -1,23 +1,86 @@
 [
-  "yocto",
-  "zepto",
-  "atto",
-  "femto",
-  "pico",
-  "nano",
-  "micro",
-  "milli",
-  "centi",
-  "deci",
-  "--Select--",
-  "deca",
-  "hecto",
-  "kilo",
-  "mega",
-  "giga",
-  "tera",
-  "peta",
-  "exa",
-  "zetta",
-  "yotta"
+  {
+    "name": "yocto",
+    "number": 1.0e-24
+  },
+  {
+    "name": "zepto",
+    "number": 1.0e-21
+  },
+  {
+    "name": "atto",
+    "number": 1.0e-18
+  },
+  {
+    "name": "femto",
+    "number": 1.0e-15
+  },
+  {
+    "name": "pico",
+    "number": 1.0e-12
+  },
+  {
+    "name": "nano",
+    "number": 1.0e-9
+  },
+  {
+    "name": "micro",
+    "number": 1.0e-6
+  },
+  {
+    "name": "milli",
+    "number": 1.0e-3
+  },
+  {
+    "name": "centi",
+    "number": 1.0e-2
+  },
+  {
+    "name": "deci",
+    "number": 1.0e-1
+  },
+  {
+    "name": "--Select--",
+    "number": 1.0e0
+  },
+  {
+    "name": "deca",
+    "number": 1.0e1
+  },
+  {
+    "name": "hecto",
+    "number": 1.0e2
+  },
+  {
+    "name": "kilo",
+    "number": 1.0e3
+  },
+  {
+    "name": "mega",
+    "number": 1.0e6
+  },
+  {
+    "name": "giga",
+    "number": 1.0e9
+  },
+  {
+    "name": "tera",
+    "number": 1.0e12
+  },
+  {
+    "name": "peta",
+    "number": 1.0e15
+  },
+  {
+    "name": "exa",
+    "number": 1.0e18
+  },
+  {
+    "name": "zetta",
+    "number": 1.0e21
+  },
+  {
+    "name": "yotta",
+    "number": 1.0e24
+  }
 ]
