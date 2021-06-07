@@ -34,6 +34,7 @@
                 <TreeViewItem Header="Global Definitions">
                     <TreeViewItem Name="parameters_treeViewItem" Header="Parameters" />
                     <TreeViewItem Name="geometry_treeViewItem" Header="Geometry" />
+                    <TreeViewItem Name="material_treeViewItem" Header="Material" />
                 </TreeViewItem>
             </TreeView>
         </Grid>
@@ -85,6 +86,7 @@
                                     <TextBox Name="newParameterValue_textBox" Width="100" Height="20" />
                                     <Label Content="Description:" Margin="10, 0, 0, 0"/>
                                     <TextBox Name="newParameterDescription_textBox" Width="100" Height="20" />
+                                    <ComboBox Name="newParameterUnitScale_comboBox" Margin="10, 0, 0, 0" Width="100" Height="25"></ComboBox>
                                 </StackPanel>
                                 <Button Grid.Row="1" Content="Add" Width="50" Height="Auto" Padding="1"  VerticalAlignment="Top" HorizontalAlignment="Center" Click="addParameter_button_Clicked"/>
                             </Grid>
@@ -112,10 +114,11 @@
                         </Grid>
                     </GroupBox>
                     <!--the following GRID should be visible when "Line" selected from "Shapes"' COMBOBOX-->
-                    <Grid Name="drawLine_grid" Visibility="Hidden" Grid.Row="1">
+                    <Grid Name="drawLine_grid" Visibility="Visible" Grid.Row="1">
                         <GroupBox Header="Draw line with two points" Margin="1" Padding="5">
                             <Grid>
                                 <Grid.RowDefinitions>
+                                    <RowDefinition Height="1*" />
                                     <RowDefinition Height="1*" />
                                     <RowDefinition Height="1*" />
                                     <RowDefinition Height="1*" />
@@ -143,7 +146,10 @@
                                 <Label Grid.Row="1" Grid.Column="5" Content="Y2:" HorizontalAlignment="Right" VerticalAlignment="Center" />
                                 <TextBox Name="line_Y2_textBox" Grid.Row="1" Grid.Column="6" VerticalAlignment="Center" />
                                 <Button Name="line_Y2_button" Grid.Row="1" Grid.Column="8" Content="Parameters" Height="Auto" VerticalAlignment="Center" Click="selectParameter_button_Clicked" />
-                                <Button Name="draw_line_button" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="9" Content="Draw" Width="50" Height="Auto" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="1" Click="drawShape_button_Clicked" />
+                                <!--<Label Grid.Row="2" Grid.Column="0" Content="Angle:" HorizontalAlignment="Right" VerticalAlignment="Center" />-->
+                                <TextBox Name="line_angle_textBox" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" Visibility="Hidden" />
+                                <!--<Button Name="line_angle_button" Grid.Row="2" Grid.Column="3" Content="Parameters" Height="Auto" VerticalAlignment="Center" Click="selectParameter_button_Clicked" />-->
+                                <Button Name="draw_line_button" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="9" Content="Draw" Width="50" Height="Auto" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="1" Click="drawShape_button_Clicked" />
                             </Grid>
                         </GroupBox>
                     </Grid>
@@ -152,6 +158,7 @@
                         <GroupBox Header="Draw rectangle with width, height and left-top corner position" Margin="1" Padding="5">
                             <Grid>
                                 <Grid.RowDefinitions>
+                                    <RowDefinition Height="1*" />
                                     <RowDefinition Height="1*" />
                                     <RowDefinition Height="1*" />
                                     <RowDefinition Height="1*" />
@@ -179,7 +186,10 @@
                                 <Label Grid.Row="1" Grid.Column="5" Content="Y:" HorizontalAlignment="Right" VerticalAlignment="Center" />
                                 <TextBox Name="rectangle_Y_textBox" Grid.Row="1" Grid.Column="6" VerticalAlignment="Center" />
                                 <Button Name="rectangle_Y_button" Grid.Row="1" Grid.Column="8" Content="Parameters" Height="Auto" VerticalAlignment="Center" Click="selectParameter_button_Clicked" />
-                                <Button Name="draw_rectangle_button" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="9" Content="Draw" Width="50" Height="Auto" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="1" Click="drawShape_button_Clicked" />
+                                <Label Grid.Row="2" Grid.Column="0" Content="Angle:" HorizontalAlignment="Right" VerticalAlignment="Center" />
+                                <TextBox Name="rectangle_angle_textBox" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" />
+                                <Button Name="rectangle_angle_button" Grid.Row="2" Grid.Column="3" Content="Parameters" Height="Auto" VerticalAlignment="Center" Click="selectParameter_button_Clicked" />
+                                <Button Name="draw_rectangle_button" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="9" Content="Draw" Width="50" Height="Auto" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="1" Click="drawShape_button_Clicked" />
                             </Grid>
                         </GroupBox>
                     </Grid>
@@ -188,6 +198,7 @@
                         <GroupBox Header="Draw ellipse with long diameter, short diameter and center position" Margin="1" Padding="5">
                             <Grid>
                                 <Grid.RowDefinitions>
+                                    <RowDefinition Height="1*" />
                                     <RowDefinition Height="1*" />
                                     <RowDefinition Height="1*" />
                                     <RowDefinition Height="1*" />
@@ -215,7 +226,10 @@
                                 <Label Grid.Row="1" Grid.Column="5" Content="Y:" HorizontalAlignment="Right" VerticalAlignment="Center" />
                                 <TextBox Name="ellipse_Y_textBox" Grid.Row="1" Grid.Column="6" VerticalAlignment="Center" />
                                 <Button Name="ellipse_Y_button" Grid.Row="1" Grid.Column="8" Content="Parameters" Height="Auto" VerticalAlignment="Center" Click="selectParameter_button_Clicked" />
-                                <Button Name="draw_ellipse_button" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="9" Content="Draw" Width="50" Height="Auto" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="1" Click="drawShape_button_Clicked" />
+                                <Label Grid.Row="2" Grid.Column="0" Content="Angle:" HorizontalAlignment="Right" VerticalAlignment="Center" />
+                                <TextBox Name="ellipse_angle_textBox" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" />
+                                <Button Name="ellipse_angle_button" Grid.Row="2" Grid.Column="3" Content="Parameters" Height="Auto" VerticalAlignment="Center" Click="selectParameter_button_Clicked" />
+                                <Button Name="draw_ellipse_button" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="9" Content="Draw" Width="50" Height="Auto" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="1" Click="drawShape_button_Clicked" />
                             </Grid>
                         </GroupBox>
                     </Grid>
@@ -241,9 +255,32 @@
                     </Grid>
                 </Grid>
             </Border>
+            <Border Name="material_border" Visibility="Hidden" BorderThickness="0, 0, 0.1, 0" BorderBrush="Black">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*" />
+                        <RowDefinition Height="1*" />
+                        <RowDefinition Height="1*" />
+                    </Grid.RowDefinitions>
+                    <GroupBox Grid.Row="0" Header="Material Assignment" Margin="1" Padding="5">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*" />
+                                <ColumnDefinition Width="1*" />
+                                <ColumnDefinition Width="1*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="1*" />
+                                <RowDefinition Height="1*" />
+                                <RowDefinition Height="1*" />
+                            </Grid.RowDefinitions>
+                        </Grid>
+                    </GroupBox>
+                </Grid>
+            </Border>
         </Grid>
         <Grid Grid.Row="1" Grid.Column="2">
-            <Canvas Name="shapes_canvas" Background="Azure">
+            <Canvas Name="shapes_canvas" Background="Azure" MouseDown="shapes_canvas_MouseDown">
             </Canvas>
         </Grid>
     </Grid>

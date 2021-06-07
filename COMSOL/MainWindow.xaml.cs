@@ -38,6 +38,11 @@ namespace COMSOL
             parameters_listView.ItemsSource = data.GetParameters();
             parameters_listView.Items.Refresh();
 
+            // set newParameterUnitScale_comboBox
+            newParameterUnitScale_comboBox.ItemsSource = data.GetUnits();
+            newParameterUnitScale_comboBox.Items.Refresh();
+            newParameterUnitScale_comboBox.SelectedIndex = data.GetUnits().IndexOf("--Select--");
+
             // set geometry_comboBox
             geometry_comboBox.ItemsSource = data.GetShapesNames();
             geometry_comboBox.SelectedIndex = 0;
@@ -72,6 +77,7 @@ namespace COMSOL
         {
             parameters_border.Visibility = Visibility.Hidden;
             geometry_border.Visibility = Visibility.Hidden;
+            material_border.Visibility = Visibility.Hidden;
 
             if (navigation_treeView.SelectedItem == parameters_treeViewItem)
             {
@@ -81,6 +87,11 @@ namespace COMSOL
             if (navigation_treeView.SelectedItem == geometry_treeViewItem)
             {
                 geometry_border.Visibility = Visibility.Visible;
+            }
+
+            if (navigation_treeView.SelectedItem == material_treeViewItem)
+            {
+                material_border.Visibility = Visibility.Visible;
             }
         }
 
@@ -204,11 +215,31 @@ namespace COMSOL
         {
             string senderName = (sender as Button).Name;
             List<int> endPositions = GetCharPositions(senderName, '_');
+            
             string shapeName = senderName.Substring(endPositions[0] + 1, (endPositions[1] - endPositions[0] - 1));
-            drawShape(shapeName);
+
+            string shapeAngleTextBox = shapeName + '_' + "angle" + '_' + "textBox";
+
+            string shapeAngleText = (this.FindName(shapeAngleTextBox) as TextBox).Text;
+            if (shapeAngleText == "")
+            {
+                shapeAngleText = Convert.ToString(0);
+            }
+
+            try
+            {
+                double shapeAngle = Convert.ToDouble(shapeAngleText);
+                drawShape(shapeName, shapeAngle);
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Something is wrong\n" + exception.ToString(), "", MessageBoxButton.OK, MessageBoxImage.Error);
+                throw;
+            }
+
         }
 
-        private void drawShape(string shapeName)
+        private void drawShape(string shapeName, double shapeAngle)
         {
             // this list should be gettable from "Data" class
             List<string> shapeNames = new List<string> { "line", "rectangle", "ellipse" };
@@ -219,10 +250,11 @@ namespace COMSOL
                 bool isValid = true;
                 isValid &= (shapeNames.Contains(shapeName));
 
-                var stroke = Brushes.Black;
-                var strokeThickness = 1;
-                var fill = Brushes.GhostWhite;
+                SolidColorBrush stroke = new SolidColorBrush(Color.FromArgb(20, 0, 0, 0));
+                SolidColorBrush fill = new SolidColorBrush(Color.FromArgb(20, 97, 97, 100));
+                double strokeThickness = 0.5;
 
+                RotateTransform rotateTransform = new RotateTransform(shapeAngle);
 
                 if (isValid)
                 {
@@ -231,18 +263,18 @@ namespace COMSOL
                         case "line":
                             Line line = new Line();
                             // here
-                            line.X1 = (5 / 9) * 1200 + Convert.ToDouble(line_X1_textBox.Text);
-                            line.X2 = (5 / 9) * 1200 + Convert.ToDouble(line_X2_textBox.Text);
+                            line.X1 = (5 / 9) * this.Width + Convert.ToDouble(line_X1_textBox.Text);
+                            line.X2 = (5 / 9) *this.Width + Convert.ToDouble(line_X2_textBox.Text);
                             line.Y1 = 20 + Convert.ToDouble(line_Y1_textBox.Text);
                             line.Y2 = 20 + Convert.ToDouble(line_Y2_textBox.Text);
+
+                            //line.RenderTransform = rotateTransform;
 
                             line.Stroke = stroke;
                             line.StrokeThickness = strokeThickness;
                             line.Fill = fill;
 
                             shapes_canvas.Children.Add(line);
-                            line.UpdateLayout();
-                            shapes_canvas.UpdateLayout();
 
                             break;
                         
@@ -253,6 +285,8 @@ namespace COMSOL
                             rectangle.Height = Convert.ToDouble(rectangle_height_textBox.Text);
                             Canvas.SetLeft(rectangle, Convert.ToDouble(rectangle_X_textBox.Text));
                             Canvas.SetTop(rectangle, Convert.ToDouble(rectangle_Y_textBox.Text));
+
+                            rectangle.RenderTransform = rotateTransform;
 
                             rectangle.Stroke = stroke;
                             rectangle.StrokeThickness = strokeThickness;
@@ -268,6 +302,8 @@ namespace COMSOL
                             ellipse.Height = Convert.ToDouble(ellipse_d_textBox.Text);
                             Canvas.SetLeft(ellipse, Convert.ToDouble(ellipse_X_textBox.Text) - ellipse.Width / 2);
                             Canvas.SetTop(ellipse, Convert.ToDouble(ellipse_Y_textBox.Text) - ellipse.Height / 2);
+
+                            ellipse.RenderTransform = rotateTransform;
 
                             ellipse.Stroke = stroke;
                             ellipse.StrokeThickness = strokeThickness;
@@ -313,6 +349,24 @@ namespace COMSOL
                 }
             }
             return new List<int>(chrPositions);
+        }
+
+        private void shapes_canvas_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            SolidColorBrush unselectedShapeFill = new SolidColorBrush(Color.FromArgb(20, 97, 97, 100));
+            SolidColorBrush selectedShapeFill = new SolidColorBrush(Color.FromArgb(20, 97, 10, 100));
+
+            foreach (System.Windows.Shapes.Shape shape in shapes_canvas.Children)
+            {
+                if (shape.IsMouseOver)
+                {
+                    shape.Fill = selectedShapeFill;
+                }
+                else
+                {
+                    shape.Fill = unselectedShapeFill;
+                }
+            }
         }
     }
 }
