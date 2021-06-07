@@ -164,6 +164,7 @@ namespace COMSOL
             drawLine_grid.Visibility = Visibility.Hidden;
             drawRectangle_grid.Visibility = Visibility.Hidden;
             drawEllipse_grid.Visibility = Visibility.Hidden;
+            drawPolygon_grid.Visibility = Visibility.Hidden;
 
             switch (geometry_comboBox.SelectedIndex)
             {
@@ -175,6 +176,9 @@ namespace COMSOL
                     break;
                 case 3:
                     drawEllipse_grid.Visibility = Visibility.Visible;
+                    break;
+                case 4:
+                    drawPolygon_grid.Visibility = Visibility.Visible;
                     break;
                 default:
                     break;
