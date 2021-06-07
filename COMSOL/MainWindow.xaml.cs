@@ -258,14 +258,12 @@ namespace COMSOL
 
         private void drawShape(string shapeName, double shapeAngle)
         {
-            // this list should be gettable from "Data" class
-            List<string> shapeNames = new List<string> { "line", "rectangle", "ellipse" };
-
             try
             {
                 // check if shape's data is valid
                 bool isValid = true;
-                isValid &= (shapeNames.Contains(shapeName));
+                shapeName = shapeName[0].ToString().ToUpper() + shapeName.Substring(1, shapeName.Length - 1);
+                isValid &= (data.GetShapesNames().Contains(shapeName));
 
                 SolidColorBrush stroke = new SolidColorBrush(Color.FromArgb(20, 0, 0, 0));
                 SolidColorBrush fill = new SolidColorBrush(Color.FromArgb(20, 97, 97, 100));
@@ -277,15 +275,13 @@ namespace COMSOL
                 {
                     switch (shapeName)
                     {
-                        case "line":
+                        case "Line":
                             Line line = new Line();
                             // here
                             line.X1 = (5 / 9) * this.Width + Convert.ToDouble(line_X1_textBox.Text);
                             line.X2 = (5 / 9) *this.Width + Convert.ToDouble(line_X2_textBox.Text);
                             line.Y1 = 20 + Convert.ToDouble(line_Y1_textBox.Text);
                             line.Y2 = 20 + Convert.ToDouble(line_Y2_textBox.Text);
-
-                            //line.RenderTransform = rotateTransform;
 
                             line.Stroke = stroke;
                             line.StrokeThickness = strokeThickness;
@@ -295,7 +291,7 @@ namespace COMSOL
 
                             break;
                         
-                        case "rectangle":
+                        case "Rectangle":
                             Rectangle rectangle = new System.Windows.Shapes.Rectangle();
                             // here
                             rectangle.Width = Convert.ToDouble(rectangle_width_textBox.Text);
@@ -313,7 +309,7 @@ namespace COMSOL
                             
                             break;
 
-                        case "ellipse":
+                        case "Ellipse":
                             Ellipse ellipse = new Ellipse();
                             ellipse.Width = Convert.ToDouble(ellipse_D_textBox.Text);
                             ellipse.Height = Convert.ToDouble(ellipse_d_textBox.Text);
@@ -329,9 +325,34 @@ namespace COMSOL
                             shapes_canvas.Children.Add(ellipse);
 
                             break;
+                        case "Polygon":
+                            if (data.polygon.Points.Count > 2)
+                            {
+                                Polygon polygon = data.polygon;
+                                
+                                polygon.RenderTransform = rotateTransform;
+
+                                polygon.Stroke = stroke;
+                                polygon.StrokeThickness = strokeThickness;
+                                polygon.Fill = fill;
+
+                                shapes_canvas.Children.Add(polygon);
+
+                                data.polygon = new Polygon();
+                            }
+                            else
+                            {
+                                MessageBox.Show("Polygon should have more than 2 points.", "", MessageBoxButton.OK, MessageBoxImage.Error);
+                            }
+
+                            break;
                         default:
                             break;
                     }
+                }
+                else
+                {
+                    MessageBox.Show("Shape is not valid", "", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
 
             }
@@ -384,6 +405,29 @@ namespace COMSOL
                     shape.Fill = unselectedShapeFill;
                 }
             }
+        }
+
+        private void add_polygon_button_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                data.polygon.Points.Add(new Point { X = Convert.ToDouble(polygon_X_textBox.Text), Y = Convert.ToDouble(polygon_Y_textBox.Text) });
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Something is wrong\n" + exception.ToString(), "", MessageBoxButton.OK, MessageBoxImage.Error);
+                throw;
+            }
+
+        }
+
+        private void cancel_polygon_button_Click(object sender, RoutedEventArgs e)
+        {
+            polygon_X_textBox.Text = "";
+            polygon_Y_textBox.Text = "";
+            data.polygon = new Polygon();
+
+            MessageBox.Show("Data has been reseted\n You can define a new polygon.", "", MessageBoxButton.OK, MessageBoxImage.Information);
         }
     }
 }

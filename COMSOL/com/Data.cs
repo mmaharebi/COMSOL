@@ -24,9 +24,7 @@ namespace COMSOL.com
 
         private List<string> ShapesNames = new List<string>();
 
-
-        private List<Point> points = new List<Point>();
-
+        public Polygon polygon = new Polygon();
 
         public Data()
         {

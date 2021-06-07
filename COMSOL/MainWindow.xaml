@@ -193,6 +193,7 @@
                             </Grid>
                         </GroupBox>
                     </Grid>
+                    <!--the following GRID should be visible when "Polygon" selected from "Shapes"' COMBOBOX-->
                     <Grid Name="drawPolygon_grid" Visibility="Visible" Grid.Row="1">
                         <GroupBox Header="Draw polygon by points" Margin="1" Padding="5">
                             <Grid>
@@ -214,15 +215,18 @@
                                     <ColumnDefinition Width="4*" />
                                 </Grid.ColumnDefinitions>
                                 <Label Grid.Row="0" Grid.Column="0" Content="X:" HorizontalAlignment="Right" VerticalAlignment="Center" />
-                                <TextBox Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" />
-                                <Button Grid.Row="0" Grid.Column="3" Content="Parameters" VerticalAlignment="Center" Click="selectParameter_button_Clicked" />
+                                <TextBox Name="polygon_X_textBox" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" />
+                                <Button Name="polygon_X_button" Grid.Row="0" Grid.Column="3" Content="Parameters" VerticalAlignment="Center" Click="selectParameter_button_Clicked" />
                                 <Label Grid.Row="0" Grid.Column="5" Content="Y:" HorizontalAlignment="Right" VerticalAlignment="Center" />
-                                <TextBox Grid.Row="0" Grid.Column="6" VerticalAlignment="Center" />
-                                <Button Grid.Row="0" Grid.Column="8" Content="Parameters" Height="Auto" VerticalAlignment="Center" Click="selectParameter_button_Clicked" />
-                                <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="9" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Width="auto">
-                                    <Button Content="Add" Width="50" Margin="10, 0, 0, 0" VerticalAlignment="Center"/>
-                                    <Button Content="Draw" Width="50" Margin="10, 0, 0, 0" />
-                                    <Button Content="Cancel" Width="50" Margin="10, 0, 0, 0" />
+                                <TextBox Name="polygon_Y_textBox" Grid.Row="0" Grid.Column="6" VerticalAlignment="Center" />
+                                <Button Name="polygon_Y_button" Grid.Row="0" Grid.Column="8" Content="Parameters" Height="Auto" VerticalAlignment="Center" Click="selectParameter_button_Clicked" />
+                                <Label Grid.Row="1" Grid.Column="0" Content="Angle:" HorizontalAlignment="Right" VerticalAlignment="Center" />
+                                <TextBox Name="polygon_angle_textBox" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" />
+                                <Button Name="polygon_angle_button" Grid.Row="1" Grid.Column="3" Content="Parameters" Height="Auto" VerticalAlignment="Center" Click="selectParameter_button_Clicked" />
+                                <StackPanel Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="9" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Width="auto">
+                                    <Button Name="add_polygon_button" Content="Add" Width="50" Margin="10, 0, 0, 0" VerticalAlignment="Center" Click="add_polygon_button_Click"/>
+                                    <Button Name="draw_polygon_button" Content="Draw" Width="50" Margin="10, 0, 0, 0" Click="drawShape_button_Clicked"/>
+                                    <Button Name="cancel_polygon_button" Content="Cancel" Width="50" Margin="10, 0, 0, 0" Click="cancel_polygon_button_Click"/>
                                 </StackPanel>
                             </Grid>
                         </GroupBox>
