@@ -13,8 +13,6 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-using NumSharp;
-
 using COMSOL.com;
 
 namespace COMSOL
@@ -187,8 +185,8 @@ namespace COMSOL
 
         private void selectParameter_button_Clicked(object sender, RoutedEventArgs e)
         {
-            // selectParameter_ToggleVisiblity();
-            selectParameter_grid.Visibility = Visibility.Visible;
+            selectParameter_ToggleVisiblity();
+            //selectParameter_grid.Visibility = Visibility.Visible;
 
             string senderName = (sender as Button).Name;
 

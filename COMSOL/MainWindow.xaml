@@ -40,9 +40,13 @@
         </Grid>
         <!--(parameters, geometry, ...) section-->
         <Grid Grid.Row="1" Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+            </Grid.RowDefinitions>
             <!--one of these BORDERs will be visible at time, by selecting an item from navigation_treeView-->
             <!--parameters control panel-->
-            <Border Name="parameters_border" Visibility="Hidden" BorderThickness="0, 0, 0.1, 0" BorderBrush="Black">
+            <Border Grid.Row="0" Grid.RowSpan="2" Name="parameters_border" Visibility="Hidden" BorderThickness="0, 0, 0.1, 0" BorderBrush="Black">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="4*" />
@@ -95,12 +99,12 @@
                 </Grid>
             </Border>
             <!--geometry control panel-->
-            <Border Name="geometry_border" Visibility="Visible" BorderThickness="0, 0, 0.1, 0" BorderBrush="Black">
+            <Border Grid.Row="0" Name="geometry_border" Visibility="Hidden" BorderThickness="0, 0, 0.1, 0" BorderBrush="Black">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="1*" />
-                        <RowDefinition Height="2*" />
+                        <!--<RowDefinition Height="2*" />-->
                     </Grid.RowDefinitions>
                     <!--this GROUPEBOX's visibility is controlled by "geometry_border" visiblity-->
                     <GroupBox Header="Shapes" Margin="1" Padding="5">
@@ -194,7 +198,7 @@
                         </GroupBox>
                     </Grid>
                     <!--the following GRID should be visible when "Polygon" selected from "Shapes"' COMBOBOX-->
-                    <Grid Name="drawPolygon_grid" Visibility="Visible" Grid.Row="1">
+                    <Grid Name="drawPolygon_grid" Visibility="Hidden" Grid.Row="1">
                         <GroupBox Header="Draw polygon by points" Margin="1" Padding="5">
                             <Grid>
                                 <Grid.RowDefinitions>
@@ -272,7 +276,77 @@
                         </GroupBox>
                     </Grid>
                     <!--the following GRID should be visible when "Parameters" BUTTON clicked from any draw GRID-->
-                    <Grid Name="selectParameter_grid" Visibility="Hidden" Grid.Row="2">
+                    <!--<Grid Name="selectParameter_grid" Visibility="Hidden" Grid.Row="2">
+                        <GroupBox Header="Select Parameter" Margin="1" Padding="5">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="20*" />
+                                    <RowDefinition Height="1*" />
+                                </Grid.RowDefinitions>
+                                <ListView Name="selectParameter_listView" Grid.Row="0" MouseDoubleClick="selectParameter_listView_DoubleClicked">
+                                    <ListView.View>
+                                        <GridView>
+                                            <GridViewColumn Header="Name" DisplayMemberBinding="{Binding name}" />
+                                            <GridViewColumn Header="Value" DisplayMemberBinding="{Binding value}"/>
+                                            <GridViewColumn Header="Description" DisplayMemberBinding="{Binding description}"/>
+                                        </GridView>
+                                    </ListView.View>
+                                </ListView>
+                            </Grid>
+                        </GroupBox>
+                    </Grid>-->
+                </Grid>
+            </Border>
+            <Border Grid.Row="0" Name="material_border" Visibility="Hidden" BorderThickness="0, 0, 0.1, 0" BorderBrush="Black">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="1*" />
+                    </Grid.RowDefinitions>
+                    <GroupBox Grid.Row="0" Header="Material Assignment" Margin="1" Padding="5">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*" />
+                                <ColumnDefinition Width="1*" />
+                                <ColumnDefinition Width="1*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="1*" />
+                                <RowDefinition Height="1*" />
+                                <RowDefinition Height="1*" />
+                            </Grid.RowDefinitions>
+                            <Label Grid.Row="0" Content="Select a type from below." />
+                            <ComboBox  Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Top" MinWidth="100"></ComboBox>
+                        </Grid>
+                    </GroupBox>
+                    <GroupBox Grid.Row="1" Header="Dielectric parameters" Visibility="Hidden" Margin="1" Padding="5">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="1*" />
+                                <RowDefinition Height="1*" />
+                                <RowDefinition Height="1*" />
+                                <RowDefinition Height="1*" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="2*" />
+                                <ColumnDefinition Width="5*" />
+                                <ColumnDefinition Width="1*" />
+                                <ColumnDefinition Width="4*" />
+                                <ColumnDefinition Width="1*" />
+                                <ColumnDefinition Width="2*" />
+                                <ColumnDefinition Width="5*" />
+                                <ColumnDefinition Width="1*" />
+                                <ColumnDefinition Width="4*" />
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Row="0" Grid.Column="0" Content="epsr:" HorizontalAlignment="Right" VerticalAlignment="Center" />
+                            <TextBox Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" />
+                            <Button Grid.Row="0" Grid.Column="3" Content="Parameters" VerticalAlignment="Center" Click="selectParameter_button_Clicked" />
+                            <Button Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="9" Content="Assign" Width="50" Height="Auto" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="1" />
+                        </Grid>
+                    </GroupBox>
+                </Grid>
+            </Border>
+            <Grid Name="selectParameter_grid" Visibility="Hidden" Grid.Row="2">
                         <GroupBox Header="Select Parameter" Margin="1" Padding="5">
                             <Grid>
                                 <Grid.RowDefinitions>
@@ -291,31 +365,6 @@
                             </Grid>
                         </GroupBox>
                     </Grid>
-                </Grid>
-            </Border>
-            <Border Name="material_border" Visibility="Hidden" BorderThickness="0, 0, 0.1, 0" BorderBrush="Black">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="1*" />
-                        <RowDefinition Height="1*" />
-                        <RowDefinition Height="1*" />
-                    </Grid.RowDefinitions>
-                    <GroupBox Grid.Row="0" Header="Material Assignment" Margin="1" Padding="5">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="1*" />
-                                <ColumnDefinition Width="1*" />
-                                <ColumnDefinition Width="1*" />
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="1*" />
-                                <RowDefinition Height="1*" />
-                                <RowDefinition Height="1*" />
-                            </Grid.RowDefinitions>
-                        </Grid>
-                    </GroupBox>
-                </Grid>
-            </Border>
         </Grid>
         <Grid Grid.Row="1" Grid.Column="2">
             <Canvas Name="shapes_canvas" Background="Azure" MouseDown="shapes_canvas_MouseDown">
