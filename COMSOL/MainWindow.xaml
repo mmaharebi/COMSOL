@@ -319,6 +319,28 @@
                             <ComboBox Name="material_comboBox" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Top" MinWidth="100" SelectionChanged="material_comboBox_SelectionChanged"></ComboBox>
                         </Grid>
                     </GroupBox>
+                    <GroupBox Name="pec_groupBox" Grid.Row="1" Header="PEC" Visibility="Hidden" Margin="1" Padding="5">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="1*" />
+                                <RowDefinition Height="1*" />
+                                <RowDefinition Height="1*" />
+                                <RowDefinition Height="1*" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="2*" />
+                                <ColumnDefinition Width="5*" />
+                                <ColumnDefinition Width="1*" />
+                                <ColumnDefinition Width="4*" />
+                                <ColumnDefinition Width="1*" />
+                                <ColumnDefinition Width="2*" />
+                                <ColumnDefinition Width="5*" />
+                                <ColumnDefinition Width="1*" />
+                                <ColumnDefinition Width="4*" />
+                            </Grid.ColumnDefinitions>
+                            <Button Name="pec_assign_button" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="9" Content="Assign" Width="50" Height="Auto" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="1" IsEnabled="False" Click="material_assign_button_Click" />
+                        </Grid>
+                    </GroupBox>
                     <GroupBox Name="dielectric_groupBox" Grid.Row="1" Header="Dielectric parameters" Visibility="Hidden" Margin="1" Padding="5">
                         <Grid>
                             <Grid.RowDefinitions>
@@ -338,10 +360,17 @@
                                 <ColumnDefinition Width="1*" />
                                 <ColumnDefinition Width="4*" />
                             </Grid.ColumnDefinitions>
-                            <Label Grid.Row="0" Grid.Column="0" Content="epsr:" HorizontalAlignment="Right" VerticalAlignment="Center" />
+                            <Label Grid.Row="0" Grid.Column="0" Content="εr:" HorizontalAlignment="Right" VerticalAlignment="Center" />
                             <TextBox Name="dielectric_epsr_textBox" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" />
                             <Button Name="dielectric_epsr_button" Grid.Row="0" Grid.Column="3" Content="Parameters" VerticalAlignment="Center" Click="selectParameter_button_Clicked" />
-                            <Button Name="dielectric_assign_button" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="9" Content="Assign" Width="50" Height="Auto" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="1" IsEnabled="False" Click="dielectric_assign_button_Click" />
+                            <Label Grid.Row="0" Grid.Column="5" Content="μr:" HorizontalAlignment="Right" VerticalAlignment="Center" />
+                            <TextBox Name="dielectric_mur_textBox" Grid.Row="0" Grid.Column="6" VerticalAlignment="Center" />
+                            <Button Name="dielectric_mur_button" Grid.Row="0" Grid.Column="8" Content="Parameters" VerticalAlignment="Center" Click="selectParameter_button_Clicked" />
+                            <Label Grid.Row="1" Grid.Column="0" Content="σ:" HorizontalAlignment="Right" VerticalAlignment="Center" />
+                            <TextBox Name="dielectric_sigma_textBox" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" />
+                            <Button Name="dielectric_sigma_button" Grid.Row="1" Grid.Column="3" Content="Parameters" VerticalAlignment="Center" Click="selectParameter_button_Clicked" />
+
+                            <Button Name="dielectric_assign_button" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="9" Content="Assign" Width="50" Height="Auto" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="1" IsEnabled="False" Click="material_assign_button_Click" />
                         </Grid>
                     </GroupBox>
                 </Grid>

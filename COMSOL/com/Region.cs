@@ -10,6 +10,6 @@ namespace COMSOL.com
     {
         public Shape shape { get; set; }
         public int id { get; set; }
-        public Dielectric dielectric { get; set; }
+        public Material material { get; set; }
     }
 }

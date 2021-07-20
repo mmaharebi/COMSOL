@@ -389,7 +389,9 @@ namespace COMSOL
             SolidColorBrush selectedShapeFill = new SolidColorBrush(Color.FromRgb(100, 100, 100));
 
             selectedShape = null;
+            pec_assign_button.IsEnabled = false;
             dielectric_assign_button.IsEnabled = false;
+
 
             foreach (System.Windows.Shapes.Shape shape in shapes_canvas.Children)
             {
@@ -397,6 +399,7 @@ namespace COMSOL
                 {
                     shape.Fill = selectedShapeFill;
                     selectedShape = shape;
+                    pec_assign_button.IsEnabled = true;
                     dielectric_assign_button.IsEnabled = true;
                 }
                 else
@@ -432,10 +435,14 @@ namespace COMSOL
         private void material_comboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             dielectric_groupBox.Visibility = Visibility.Hidden;
+            pec_groupBox.Visibility = Visibility.Hidden;
 
             switch (material_comboBox.SelectedIndex)
             {
                 case 1:
+                    pec_groupBox.Visibility = Visibility.Visible;
+                    break;
+                case 2:
                     dielectric_groupBox.Visibility = Visibility.Visible;
                     break;
                 default:
@@ -443,10 +450,34 @@ namespace COMSOL
             }
         }
 
-        private void dielectric_assign_button_Click(object sender, RoutedEventArgs e)
+        private void material_assign_button_Click(object sender, RoutedEventArgs e)
         {
-            Region region = new Region { shape = selectedShape, dielectric = new Dielectric { epsr = Convert.ToDouble(dielectric_epsr_textBox.Text) }, id = regionIdCounter++ };
-            data.addRegion(region);
+            Region region = new Region { };
+            region.id = regionIdCounter++;
+
+            switch (material_comboBox.SelectedIndex)
+            {
+                case 1:
+                    region.material = new Material { epsr = 0, mur = 0, sigma = -1 };
+                    data.addRegion(region);
+                    break;
+
+                case 2:
+                    try
+                    {
+                        region.material = new Material { epsr = Convert.ToDouble(dielectric_epsr_textBox.Text), mur = Convert.ToDouble(dielectric_mur_textBox.Text), sigma = Convert.ToDouble(dielectric_sigma_textBox.Text) };
+                        data.addRegion(region);
+                    }
+                    catch (Exception exception)
+                    {
+                        MessageBox.Show("Something is wrong\n" + exception.ToString(), "", MessageBoxButton.OK, MessageBoxImage.Error);
+                        throw;
+                    }
+                    break;
+
+                default:
+                    break;
+            }
         }
     }
 }

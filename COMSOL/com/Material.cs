@@ -4,7 +4,7 @@ using System.Text;
 
 namespace COMSOL.com
 {
-    class Dielectric
+    class Material
     {
         public double epsr { get; set; }
         public double mur { get; set; }
