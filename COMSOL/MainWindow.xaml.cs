@@ -27,6 +27,8 @@ namespace COMSOL
 
         // to know wich "Select Parameter" button clicked
         private string targetTextBox;
+        private Shape selectedShape;
+        private int regionIdCounter = 1;
 
         public MainWindow()
         {
@@ -54,6 +56,11 @@ namespace COMSOL
             geometry_comboBox.ItemsSource = data.GetShapesNames();
             geometry_comboBox.SelectedIndex = 0;
             geometry_comboBox.Items.Refresh();
+
+            // set material_comboBox
+            material_comboBox.ItemsSource = data.GetReegionTypes();
+            material_comboBox.SelectedIndex = 0;
+            material_comboBox.Items.Refresh();
 
             // set selectParameter_listView
             selectParameter_listView.ItemsSource = data.GetParameters();
@@ -159,23 +166,23 @@ namespace COMSOL
 
         private void geometry_comboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            drawLine_grid.Visibility = Visibility.Hidden;
+            //drawLine_grid.Visibility = Visibility.Hidden;
             drawRectangle_grid.Visibility = Visibility.Hidden;
             drawEllipse_grid.Visibility = Visibility.Hidden;
             drawPolygon_grid.Visibility = Visibility.Hidden;
 
             switch (geometry_comboBox.SelectedIndex)
             {
+                //case 1:
+                //    drawLine_grid.Visibility = Visibility.Visible;
+                //    break;
                 case 1:
-                    drawLine_grid.Visibility = Visibility.Visible;
-                    break;
-                case 2:
                     drawRectangle_grid.Visibility = Visibility.Visible;
                     break;
-                case 3:
+                case 2:
                     drawEllipse_grid.Visibility = Visibility.Visible;
                     break;
-                case 4:
+                case 3:
                     drawPolygon_grid.Visibility = Visibility.Visible;
                     break;
                 default:
@@ -263,9 +270,7 @@ namespace COMSOL
                 shapeName = shapeName[0].ToString().ToUpper() + shapeName.Substring(1, shapeName.Length - 1);
                 isValid &= (data.GetShapesNames().Contains(shapeName));
 
-                SolidColorBrush stroke = new SolidColorBrush(Color.FromArgb(20, 0, 0, 0));
-                SolidColorBrush fill = new SolidColorBrush(Color.FromArgb(20, 97, 97, 100));
-                double strokeThickness = 0.5;
+                SolidColorBrush fill = new SolidColorBrush(Color.FromRgb(0, 0, 0));
 
                 RotateTransform rotateTransform = new RotateTransform(shapeAngle);
 
@@ -273,22 +278,19 @@ namespace COMSOL
                 {
                     switch (shapeName)
                     {
-                        case "Line":
-                            Line line = new Line();
-                            // here
-                            line.X1 = (5 / 9) * this.Width + Convert.ToDouble(line_X1_textBox.Text);
-                            line.X2 = (5 / 9) *this.Width + Convert.ToDouble(line_X2_textBox.Text);
-                            line.Y1 = 20 + Convert.ToDouble(line_Y1_textBox.Text);
-                            line.Y2 = 20 + Convert.ToDouble(line_Y2_textBox.Text);
+                        //case "Line":
+                        //    Line line = new Line();
+                        //    line.X1 = (5 / 9) * this.Width + Convert.ToDouble(line_X1_textBox.Text);
+                        //    line.X2 = (5 / 9) * this.Width + Convert.ToDouble(line_X2_textBox.Text);
+                        //    line.Y1 = 20 + Convert.ToDouble(line_Y1_textBox.Text);
+                        //    line.Y2 = 20 + Convert.ToDouble(line_Y2_textBox.Text);
 
-                            line.Stroke = stroke;
-                            line.StrokeThickness = strokeThickness;
-                            line.Fill = fill;
+                        //    line.Fill = fill;
 
-                            shapes_canvas.Children.Add(line);
+                        //    shapes_canvas.Children.Add(line);
 
-                            break;
-                        
+                        //    break;
+
                         case "Rectangle":
                             Rectangle rectangle = new System.Windows.Shapes.Rectangle();
                             // here
@@ -299,8 +301,6 @@ namespace COMSOL
 
                             rectangle.RenderTransform = rotateTransform;
 
-                            rectangle.Stroke = stroke;
-                            rectangle.StrokeThickness = strokeThickness;
                             rectangle.Fill = fill;
 
                             shapes_canvas.Children.Add(rectangle);
@@ -316,8 +316,6 @@ namespace COMSOL
 
                             ellipse.RenderTransform = rotateTransform;
 
-                            ellipse.Stroke = stroke;
-                            ellipse.StrokeThickness = strokeThickness;
                             ellipse.Fill = fill;
 
                             shapes_canvas.Children.Add(ellipse);
@@ -330,8 +328,6 @@ namespace COMSOL
                                 
                                 polygon.RenderTransform = rotateTransform;
 
-                                polygon.Stroke = stroke;
-                                polygon.StrokeThickness = strokeThickness;
                                 polygon.Fill = fill;
 
                                 shapes_canvas.Children.Add(polygon);
@@ -389,14 +385,19 @@ namespace COMSOL
 
         private void shapes_canvas_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            SolidColorBrush unselectedShapeFill = new SolidColorBrush(Color.FromArgb(20, 97, 97, 100));
-            SolidColorBrush selectedShapeFill = new SolidColorBrush(Color.FromArgb(20, 97, 10, 100));
+            SolidColorBrush unselectedShapeFill = new SolidColorBrush(Color.FromRgb(0, 0, 0));
+            SolidColorBrush selectedShapeFill = new SolidColorBrush(Color.FromRgb(100, 100, 100));
+
+            selectedShape = null;
+            dielectric_assign_button.IsEnabled = false;
 
             foreach (System.Windows.Shapes.Shape shape in shapes_canvas.Children)
             {
                 if (shape.IsMouseOver)
                 {
                     shape.Fill = selectedShapeFill;
+                    selectedShape = shape;
+                    dielectric_assign_button.IsEnabled = true;
                 }
                 else
                 {
@@ -426,6 +427,26 @@ namespace COMSOL
             data.polygon = new Polygon();
 
             MessageBox.Show("Data has been reseted\n You can define a new polygon.", "", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+
+        private void material_comboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            dielectric_groupBox.Visibility = Visibility.Hidden;
+
+            switch (material_comboBox.SelectedIndex)
+            {
+                case 1:
+                    dielectric_groupBox.Visibility = Visibility.Visible;
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void dielectric_assign_button_Click(object sender, RoutedEventArgs e)
+        {
+            Region region = new Region { shape = selectedShape, dielectric = new Dielectric { epsr = Convert.ToDouble(dielectric_epsr_textBox.Text) }, id = regionIdCounter++ };
+            data.addRegion(region);
         }
     }
 }

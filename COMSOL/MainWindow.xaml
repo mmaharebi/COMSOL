@@ -117,7 +117,7 @@
                             <ComboBox Name="geometry_comboBox" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top" MinWidth="100" SelectionChanged="geometry_comboBox_SelectionChanged"></ComboBox>
                         </Grid>
                     </GroupBox>
-                    <!--the following GRID should be visible when "Line" selected from "Shapes"' COMBOBOX-->
+                    <!--the following GRID should be visible when "Line" selected from "Shapes"' COMBOBOX--><!--
                     <Grid Name="drawLine_grid" Visibility="Hidden" Grid.Row="1">
                         <GroupBox Header="Draw line with two points" Margin="1" Padding="5">
                             <Grid>
@@ -150,13 +150,13 @@
                                 <Label Grid.Row="1" Grid.Column="5" Content="Y2:" HorizontalAlignment="Right" VerticalAlignment="Center" />
                                 <TextBox Name="line_Y2_textBox" Grid.Row="1" Grid.Column="6" VerticalAlignment="Center" />
                                 <Button Name="line_Y2_button" Grid.Row="1" Grid.Column="8" Content="Parameters" Height="Auto" VerticalAlignment="Center" Click="selectParameter_button_Clicked" />
-                                <!--<Label Grid.Row="2" Grid.Column="0" Content="Angle:" HorizontalAlignment="Right" VerticalAlignment="Center" />-->
+                                --><!--<Label Grid.Row="2" Grid.Column="0" Content="Angle:" HorizontalAlignment="Right" VerticalAlignment="Center" />--><!--
                                 <TextBox Name="line_angle_textBox" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" Visibility="Hidden" />
-                                <!--<Button Name="line_angle_button" Grid.Row="2" Grid.Column="3" Content="Parameters" Height="Auto" VerticalAlignment="Center" Click="selectParameter_button_Clicked" />-->
+                                --><!--<Button Name="line_angle_button" Grid.Row="2" Grid.Column="3" Content="Parameters" Height="Auto" VerticalAlignment="Center" Click="selectParameter_button_Clicked" />--><!--
                                 <Button Name="draw_line_button" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="9" Content="Draw" Width="50" Height="Auto" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="1" Click="drawShape_button_Clicked" />
                             </Grid>
                         </GroupBox>
-                    </Grid>
+                    </Grid>-->
                     <!--the following GRID should be visible when "Rectangle" selected from "Shapes"' COMBOBOX-->
                     <Grid Name="drawRectangle_grid" Visibility="Hidden" Grid.Row="1">
                         <GroupBox Header="Draw rectangle with width, height and left-top corner position" Margin="1" Padding="5">
@@ -316,10 +316,10 @@
                                 <RowDefinition Height="1*" />
                             </Grid.RowDefinitions>
                             <Label Grid.Row="0" Content="Select a type from below." />
-                            <ComboBox  Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Top" MinWidth="100"></ComboBox>
+                            <ComboBox Name="material_comboBox" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Top" MinWidth="100" SelectionChanged="material_comboBox_SelectionChanged"></ComboBox>
                         </Grid>
                     </GroupBox>
-                    <GroupBox Grid.Row="1" Header="Dielectric parameters" Visibility="Hidden" Margin="1" Padding="5">
+                    <GroupBox Name="dielectric_groupBox" Grid.Row="1" Header="Dielectric parameters" Visibility="Hidden" Margin="1" Padding="5">
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="1*" />
@@ -339,9 +339,9 @@
                                 <ColumnDefinition Width="4*" />
                             </Grid.ColumnDefinitions>
                             <Label Grid.Row="0" Grid.Column="0" Content="epsr:" HorizontalAlignment="Right" VerticalAlignment="Center" />
-                            <TextBox Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" />
-                            <Button Grid.Row="0" Grid.Column="3" Content="Parameters" VerticalAlignment="Center" Click="selectParameter_button_Clicked" />
-                            <Button Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="9" Content="Assign" Width="50" Height="Auto" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="1" />
+                            <TextBox Name="dielectric_epsr_textBox" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" />
+                            <Button Name="dielectric_epsr_button" Grid.Row="0" Grid.Column="3" Content="Parameters" VerticalAlignment="Center" Click="selectParameter_button_Clicked" />
+                            <Button Name="dielectric_assign_button" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="9" Content="Assign" Width="50" Height="Auto" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="1" IsEnabled="False" Click="dielectric_assign_button_Click" />
                         </Grid>
                     </GroupBox>
                 </Grid>
